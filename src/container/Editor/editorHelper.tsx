@@ -1,6 +1,8 @@
 import React from "react";
 
-import { RenderElementProps, RenderLeafProps } from "slate-react";
+import { BaseElement } from "slate";
+
+import { RenderElementProps, RenderLeafProps, ReactEditor } from "slate-react";
 
 export interface IFlxEditorPlugin {
   name: string;
@@ -12,6 +14,11 @@ export interface IFlxEditorPlugin {
 
   renderLeaf?: (props: RenderLeafProps) => JSX.Element | undefined;
 
+  widget?: {
+    toolBarWidget?: JSX.Element;
+    renderWidgetOnPupup?: boolean;
+  };
+
   eventHandles?: { [key: string]: (args: any[]) => boolean };
 }
 
@@ -20,7 +27,7 @@ export class EditorHelper {
   private plugins: IFlxEditorPlugin[];
   private elementPluginMap: Map<string, IFlxEditorPlugin>;
   private leafPlugins: IFlxEditorPlugin[];
-  constructor(plugins: IFlxEditorPlugin[]) {
+  constructor(editor: ReactEditor, plugins: IFlxEditorPlugin[]) {
     this.plugins = plugins;
 
     this.elementPluginMap = new Map(
@@ -28,6 +35,16 @@ export class EditorHelper {
     );
 
     this.leafPlugins = plugins.filter((p) => p.isLeaf);
+
+    this.renderElement = this.renderElement.bind(this);
+    this.renderLeaf = this.renderLeaf.bind(this);
+    this.isVoid = this.isVoid.bind(this);
+
+    this.initEditorHelper(editor);
+  }
+
+  private initEditorHelper(editor: ReactEditor) {
+    editor.isVoid = this.isVoid;
   }
 
   renderElement(props: RenderElementProps) {
@@ -58,6 +75,12 @@ export class EditorHelper {
     });
 
     return leafNode;
+  }
+
+  private isVoid(ele: BaseElement) {
+    const type = (ele as any).type as string;
+    const elePlugin = this.elementPluginMap.get(type);
+    return elePlugin?.isVoid || false;
   }
 }
 
