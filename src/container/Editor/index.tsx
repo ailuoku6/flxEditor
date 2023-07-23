@@ -1,17 +1,13 @@
 import React, { useEffect, useMemo } from "react";
 
-import {
-  Editable,
-  withReact,
-  Slate,
-  RenderElementProps,
-  RenderLeafProps,
-} from "slate-react";
+import { Editable, withReact, Slate } from "slate-react";
 
 import { createEditor, Descendant } from "slate";
 import { withHistory } from "slate-history";
 
 import { EditorHelper, IFlxEditorPlugin } from "./editorHelper";
+
+import "./index.scss";
 
 const initValue: Descendant[] = [
   { type: "paragraph", children: [{ text: "" }] },
@@ -32,7 +28,7 @@ export default function FlxEditor() {
 
   return (
     <Slate editor={editor} initialValue={initValue}>
-      <div>
+      <div className={"editor-wrap"}>
         {editorHelper.renderToolBar()}
         <Editable
           // renderElement={renderElement}
