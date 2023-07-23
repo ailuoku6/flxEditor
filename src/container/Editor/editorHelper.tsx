@@ -4,6 +4,8 @@ import { BaseElement } from "slate";
 
 import { RenderElementProps, RenderLeafProps, ReactEditor } from "slate-react";
 
+import Toolbar from "./components/Toolbar";
+
 export interface IFlxEditorPlugin {
   name: string;
   isElement: boolean;
@@ -81,6 +83,14 @@ export class EditorHelper {
     const type = (ele as any).type as string;
     const elePlugin = this.elementPluginMap.get(type);
     return elePlugin?.isVoid || false;
+  }
+
+  renderToolBar() {
+    const toolBarWidgets = this.plugins
+      .filter((p) => p.widget?.toolBarWidget)
+      .map((p) => p.widget?.toolBarWidget);
+
+    return <Toolbar>{toolBarWidgets}</Toolbar>;
   }
 }
 

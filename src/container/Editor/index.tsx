@@ -11,23 +11,19 @@ import {
 import { createEditor, Descendant } from "slate";
 import { withHistory } from "slate-history";
 
+import { EditorHelper, IFlxEditorPlugin } from "./editorHelper";
+
 const initValue: Descendant[] = [
   { type: "paragraph", children: [{ text: "" }] },
 ] as any;
 
-const renderElement = (props: RenderElementProps) => {
-  const { attributes, children } = props;
-  return <p {...attributes}>{children}</p>;
-};
-
-const renderLeaf = (props: RenderLeafProps) => {
-  const { attributes, children } = props;
-  return <span {...attributes}>{children}</span>;
-};
+const plugins: IFlxEditorPlugin[] = [];
 
 export default function FlxEditor() {
-  const editor = useMemo(() => {
-    return withHistory(withReact(createEditor()));
+  const [editor, editorHelper] = useMemo(() => {
+    const editor = withHistory(withReact(createEditor()));
+    const editorHelper = new EditorHelper(editor, plugins);
+    return [editor, editorHelper];
   }, []);
 
   useEffect(() => {
@@ -36,13 +32,18 @@ export default function FlxEditor() {
 
   return (
     <Slate editor={editor} initialValue={initValue}>
-      <Editable
-        renderElement={renderElement}
-        renderLeaf={renderLeaf}
-        placeholder="Enter some rich text…"
-        spellCheck
-        autoFocus
-      />
+      <div>
+        {editorHelper.renderToolBar()}
+        <Editable
+          // renderElement={renderElement}
+          // renderLeaf={renderLeaf}
+          renderElement={editorHelper.renderElement}
+          renderLeaf={editorHelper.renderLeaf}
+          placeholder="Enter some rich text…"
+          spellCheck
+          autoFocus
+        />
+      </div>
     </Slate>
   );
 }
