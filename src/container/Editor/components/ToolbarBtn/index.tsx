@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Element as SlateElement, Editor, Transforms } from "slate";
+import { Element as SlateElement, Editor, Transforms, BaseEditor } from "slate";
 
 import { ReactEditor, useSlate } from "slate-react";
 
@@ -114,14 +114,14 @@ export const MarkButton = ({
   const editor = useSlate();
   return (
     <Button
-      type={isMarkActive(editor, format) ? "primary" : "default"}
+      type={isMarkActive(editor as ReactEditor, format) ? "primary" : "default"}
       // active={isMarkActive(editor, format)}
       onMouseDown={(event) => {
         event.preventDefault();
-        toggleMark(editor, format);
+        toggleMark(editor as ReactEditor, format);
       }}
     >
-      icon
+      {icon}
     </Button>
   );
 };

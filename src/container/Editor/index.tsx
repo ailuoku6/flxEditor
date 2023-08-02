@@ -7,13 +7,15 @@ import { withHistory } from "slate-history";
 
 import { EditorHelper, IFlxEditorPlugin } from "./editorHelper";
 
+import { BoldTextPlugin } from "./plugins/BoldText";
+
 import "./index.scss";
 
 const initValue: Descendant[] = [
   { type: "paragraph", children: [{ text: "" }] },
 ] as any;
 
-const plugins: IFlxEditorPlugin[] = [];
+const plugins: IFlxEditorPlugin[] = [BoldTextPlugin];
 
 export default function FlxEditor() {
   const [editor, editorHelper] = useMemo(() => {
@@ -28,9 +30,10 @@ export default function FlxEditor() {
 
   return (
     <Slate editor={editor} initialValue={initValue}>
-      <div className={"editor-wrap"}>
+      <div className={"flx-editor-wrap"}>
         {editorHelper.renderToolBar()}
         <Editable
+          className="flx-editor"
           // renderElement={renderElement}
           // renderLeaf={renderLeaf}
           renderElement={editorHelper.renderElement}
