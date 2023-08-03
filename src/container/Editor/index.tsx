@@ -9,6 +9,7 @@ import { EditorHelper, IFlxEditorPlugin } from "./editorHelper";
 
 import { BoldTextPlugin } from "./plugins/BoldText";
 import { UnderlinePlugin } from "./plugins/Underline";
+import { ItalicPlugin } from "./plugins/Italic";
 
 import "./index.scss";
 
@@ -16,7 +17,11 @@ const initValue: Descendant[] = [
   { type: "paragraph", children: [{ text: "" }] },
 ] as any;
 
-const plugins: IFlxEditorPlugin[] = [BoldTextPlugin, UnderlinePlugin];
+const plugins: IFlxEditorPlugin[] = [
+  BoldTextPlugin,
+  UnderlinePlugin,
+  ItalicPlugin,
+];
 
 export default function FlxEditor() {
   const [editor, editorHelper] = useMemo(() => {

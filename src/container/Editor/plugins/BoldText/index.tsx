@@ -17,6 +17,8 @@ export const BoldTextPlugin: IFlxEditorPlugin = {
     }
   },
   widget: {
-    toolBarWidget: <MarkButton format={PluginName} icon="bold" />,
+    toolBarWidget: (
+      <MarkButton key={PluginName} format={PluginName} icon="bold" />
+    ),
   },
 };

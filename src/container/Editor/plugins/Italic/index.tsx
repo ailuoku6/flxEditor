@@ -4,21 +4,21 @@ import { IFlxEditorPlugin } from "../../editorHelper";
 
 import { MarkButton } from "../../components/ToolbarBtn";
 
-const PluginName = "underline";
+const PluginName = "italic";
 
-export const UnderlinePlugin: IFlxEditorPlugin = {
+export const ItalicPlugin: IFlxEditorPlugin = {
   name: PluginName,
   isElement: false,
   isLeaf: true,
   renderLeaf: (props) => {
     const { leaf } = props;
     if ((leaf as any)[PluginName]) {
-      return <u {...props.attributes}>{props.children}</u>;
+      return <em {...props.attributes}>{props.children}</em>;
     }
   },
   widget: {
     toolBarWidget: (
-      <MarkButton key={PluginName} format={PluginName} icon="underline" />
+      <MarkButton key={PluginName} format={PluginName} icon="italic" />
     ),
   },
 };
