@@ -19,6 +19,7 @@ export interface IFlxEditorPlugin {
   widget?: {
     toolBarWidget?: JSX.Element;
     renderWidgetOnPupup?: boolean;
+    blockToolbarWidget?: boolean;
   };
 
   eventHandles?: { [key: string]: (args: any[]) => boolean };
