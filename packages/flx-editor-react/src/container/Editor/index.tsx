@@ -13,6 +13,10 @@ import React, { useEffect, useMemo } from "react";
 
 import "./index.scss";
 import { IFlxEditorPlugin, initFlxEditor, Descendant, Editable, Slate, BoldPlugin, UnderlinePlugin } from "flx-editor-base";
+
+import { ResumeBasicPlugin } from "./plugins/resume-basic";
+import { ResumeTitlePlugin } from "./plugins/resume-title";
+import { ResumeDetailPlugin } from "./plugins/resume-detai";
 // import { Descendant } from "slate";
 
 import Toolbar from "./components/Toolbar";
@@ -24,6 +28,9 @@ const initValue: Descendant[] = [
 const plugins: IFlxEditorPlugin[] = [
   BoldPlugin,
   UnderlinePlugin,
+  ResumeBasicPlugin,
+  ResumeTitlePlugin,
+  ResumeDetailPlugin
   // ItalicPlugin,
 ];
 

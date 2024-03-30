@@ -1,0 +1,21 @@
+.resume-detail {
+    padding-left: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.resume-detail-title {
+    min-width: 100px;
+    max-width: 50%;
+}
+
+.resume-detail-date {
+    min-width: 100px;
+    max-width: 50%;
+    text-align: right;
+}
+
+.resume-detail-content {
+    width: 100%;
+}
+

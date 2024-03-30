@@ -1,6 +1,31 @@
-.flx-editor-wrap {
-  padding: 40px;
+@font-face {
+  font-family: 'oppo-sans';
+  src: url('../../font/oppo-sans/OPPOSans-R.ttf') format('truetype');
+  font-weight: 400; /* 常规字体的权重通常是400 */
+}
 
+@font-face {
+  font-family: 'oppo-sans';
+  src: url('../../font/oppo-sans/OPPOSans-M.ttf') format('truetype');
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: 'oppo-sans';
+  src: url('../../font/oppo-sans/OPPOSans-B.ttf') format('truetype');
+  font-weight: 700; /* 粗体字体的权重通常是700 */
+}
+
+.body {
+  font-family: 'oppo-sans';
+  font-weight: 400;
+}
+
+.flx-editor-wrap {
+  font-family: 'oppo-sans';
+  font-weight: 400;
+
+  padding: 40px;
   .flx-editor {
     outline: none;
   }

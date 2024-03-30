@@ -46,11 +46,13 @@ export class EditorHelper {
     renderLeaf(props: RenderLeafProps) {
         const { attributes, children, leaf } = props;
 
-        let leafNode = <span {...attributes}>{children}</span>;
+        // let leafNode = <span {...attributes}>{children}</span>;
+        let leafNode = children;
+
 
         this.plugins.forEach((plugin) => {
             const name = plugin.name;
-            if (plugin.type === PluginType.Element && plugin.matchLeaf?.(props) || (leaf as any)[name]) {
+            if (plugin.type === PluginType.Element && plugin.matchLeaf?.(props) || (leaf.leafType) === name || leaf[name] === true) {
                 leafNode = plugin.renderLeaf?.({
                     ...props, attributes: {} as any,
                     children: leafNode,
@@ -58,7 +60,9 @@ export class EditorHelper {
             }
         });
 
-        return leafNode;
+        // return leafNode;
+
+        return <span {...attributes} className='testgy1'>{leafNode}</span>;
     }
 
     private isVoid(ele: BaseElement) {

@@ -1,0 +1,32 @@
+.resume-basic-wrapper {
+    min-height: 150px;
+    position: relative;
+}
+
+.resume-basic-name {
+    /* position: absolute; */
+    font-size: 30px;
+
+}
+.resume-basic-gender {
+    font-size: 20px;
+    margin-left: 40px;
+}
+
+.resume-basic-address {
+    display: block;
+    font-size: 20px;
+}
+
+.resume-basic-phone {
+    display: inline-block;
+    font-size: 20px;
+    margin-top: 30px;
+}
+
+.resume-basic-email {
+    display: inline-block;
+    font-size: 20px;
+    margin-left: 100px;
+    margin-top: 30px;
+}

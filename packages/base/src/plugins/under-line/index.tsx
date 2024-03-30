@@ -4,29 +4,10 @@ import { IFlxEditorPlugin, PluginType } from "../../types";
 import { toggleMark } from "../../utils";
 import { ReactEditor, useSlate } from "slate-react";
 
+import { MarkButton } from "../../common/components";
+
 const PluginName = "underline";
 
-const MarkButton = ({
-    format,
-    icon,
-}: {
-    format: string;
-    icon: string;
-}) => {
-    const editor = useSlate();
-    return (
-        <button
-            // type={isMarkActive(editor as ReactEditor, format) ? "primary" : "default"}
-            // active={isMarkActive(editor, format)}
-            onMouseDown={(event) => {
-                event.preventDefault();
-                toggleMark(editor as ReactEditor, format);
-            }}
-        >
-            {icon}
-        </button>
-    );
-};
 
 export const UnderlinePlugin: IFlxEditorPlugin = {
     name: PluginName,

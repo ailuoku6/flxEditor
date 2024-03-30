@@ -1,6 +1,7 @@
 export * from './core';
 export * from './types';
 export * from './plugins';
+export * from './common';
 
 export * from 'slate';
 export * from 'slate-react';
