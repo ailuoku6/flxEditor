@@ -1,18 +1,51 @@
+// @font-face {
+//   font-family: 'oppo-sans';
+//   src: url('../../font/oppo-sans/OPPOSans-R.ttf') format('truetype');
+//   font-weight: 400; /* 常规字体的权重通常是400 */
+// }
+
+// @font-face {
+//   font-family: 'oppo-sans';
+//   src: url('../../font/oppo-sans/OPPOSans-M.ttf') format('truetype');
+//   font-weight: 600;
+// }
+
+// @font-face {
+//   font-family: 'oppo-sans';
+//   src: url('../../font/oppo-sans/OPPOSans-B.ttf') format('truetype');
+//   font-weight: 700; /* 粗体字体的权重通常是700 */
+// }
+
 @font-face {
-  font-family: 'oppo-sans';
-  src: url('../../font/oppo-sans/OPPOSans-R.ttf') format('truetype');
+  font-family: "oppo-sans";
+  src: url("https://db.onlinewebfonts.com/t/aca7761d83fa70e338bcdd281e9cbb95.eot");
+  src: url("https://db.onlinewebfonts.com/t/aca7761d83fa70e338bcdd281e9cbb95.eot?#iefix")format("embedded-opentype"),
+  url("https://db.onlinewebfonts.com/t/aca7761d83fa70e338bcdd281e9cbb95.woff2")format("woff2"),
+  url("https://db.onlinewebfonts.com/t/aca7761d83fa70e338bcdd281e9cbb95.woff")format("woff"),
+  url("https://db.onlinewebfonts.com/t/aca7761d83fa70e338bcdd281e9cbb95.ttf")format("truetype"),
+  url("https://db.onlinewebfonts.com/t/aca7761d83fa70e338bcdd281e9cbb95.svg#OPPOSans R")format("svg");
   font-weight: 400; /* 常规字体的权重通常是400 */
 }
 
 @font-face {
-  font-family: 'oppo-sans';
-  src: url('../../font/oppo-sans/OPPOSans-M.ttf') format('truetype');
+  font-family: "oppo-sans";
+  src: url("https://db.onlinewebfonts.com/t/8a567f4b5a5367bc01e2c94ce99c5ffb.eot");
+  src: url("https://db.onlinewebfonts.com/t/8a567f4b5a5367bc01e2c94ce99c5ffb.eot?#iefix")format("embedded-opentype"),
+  url("https://db.onlinewebfonts.com/t/8a567f4b5a5367bc01e2c94ce99c5ffb.woff2")format("woff2"),
+  url("https://db.onlinewebfonts.com/t/8a567f4b5a5367bc01e2c94ce99c5ffb.woff")format("woff"),
+  url("https://db.onlinewebfonts.com/t/8a567f4b5a5367bc01e2c94ce99c5ffb.ttf")format("truetype"),
+  url("https://db.onlinewebfonts.com/t/8a567f4b5a5367bc01e2c94ce99c5ffb.svg#OPPOSans M")format("svg");
   font-weight: 600;
 }
 
 @font-face {
-  font-family: 'oppo-sans';
-  src: url('../../font/oppo-sans/OPPOSans-B.ttf') format('truetype');
+  font-family: "oppo-sans";
+  src: url("https://db.onlinewebfonts.com/t/76888f391729c7bcb81ab98f8df64144.eot");
+  src: url("https://db.onlinewebfonts.com/t/76888f391729c7bcb81ab98f8df64144.eot?#iefix")format("embedded-opentype"),
+  url("https://db.onlinewebfonts.com/t/76888f391729c7bcb81ab98f8df64144.woff2")format("woff2"),
+  url("https://db.onlinewebfonts.com/t/76888f391729c7bcb81ab98f8df64144.woff")format("woff"),
+  url("https://db.onlinewebfonts.com/t/76888f391729c7bcb81ab98f8df64144.ttf")format("truetype"),
+  url("https://db.onlinewebfonts.com/t/76888f391729c7bcb81ab98f8df64144.svg#OPPOSans-B")format("svg");
   font-weight: 700; /* 粗体字体的权重通常是700 */
 }
 
