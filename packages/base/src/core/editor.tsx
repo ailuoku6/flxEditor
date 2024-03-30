@@ -35,12 +35,10 @@ export class EditorHelper {
     renderElement(props: RenderElementProps) {
         const { element, attributes, children } = props;
 
-        return <div {...attributes} style={{ position: 'relative' }} > {children} </div>;
-
         const type = (element as any).type as string;
         const elePlugin = this.elementPluginMap.get(type) || this.plugins.find((p) => p.match?.(props));
         return (
-            elePlugin?.renderElement?.(props) || <p {...attributes} > {children} </p>
+            elePlugin?.renderElement?.(props) || <p {...attributes} >{children}</p>
         );
     }
 
@@ -48,9 +46,7 @@ export class EditorHelper {
     renderLeaf(props: RenderLeafProps) {
         const { attributes, children, leaf } = props;
 
-        let leafNode = <span {...attributes} > {children} </span>;
-
-        return leafNode;
+        let leafNode = <span {...attributes}>{children}</span>;
 
         this.plugins.forEach((plugin) => {
             const name = plugin.name;

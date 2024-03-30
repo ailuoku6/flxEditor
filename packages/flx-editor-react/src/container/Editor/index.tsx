@@ -18,14 +18,15 @@ import { IFlxEditorPlugin, initFlxEditor, Descendant, Editable, Slate, BoldPlugi
 import Toolbar from "./components/Toolbar";
 
 const initValue: Descendant[] = [
-  { type: "paragraph", children: [{ text: "131" }] },
+  { type: "paragraph", children: [{ text: "" }] },
 ] as any;
 
 const plugins: IFlxEditorPlugin[] = [
-  // BoldPlugin,
-  // UnderlinePlugin,
+  BoldPlugin,
+  UnderlinePlugin,
   // ItalicPlugin,
 ];
+
 
 export default function FlxEditor() {
   const [editor, editorHelper] = useMemo(() => {
@@ -51,12 +52,11 @@ export default function FlxEditor() {
     <Slate editor={editor} initialValue={initValue}>
       <div className={"flx-editor-wrap"}>
         {/* {editorHelper.renderToolBar()} */}
-        {/* {toolbar} */}
+        {toolbar}
         <Editable
           className="flx-editor"
-
-          // renderElement={editorHelper.renderElement}
-          // renderLeaf={editorHelper.renderLeaf}
+          renderElement={editorHelper.renderElement}
+          renderLeaf={editorHelper.renderLeaf}
           placeholder="Enter some rich text…"
           spellCheck
           autoFocus

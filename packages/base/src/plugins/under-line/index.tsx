@@ -34,7 +34,7 @@ export const UnderlinePlugin: IFlxEditorPlugin = {
     renderLeaf: (props) => {
         const { leaf } = props;
         if ((leaf as any)[PluginName]) {
-            return <u {...props.attributes} > {props.children} </u>;
+            return <u {...props.attributes} >{props.children}</u>;
         }
     },
     widget: {
