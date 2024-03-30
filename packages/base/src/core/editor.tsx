@@ -34,6 +34,9 @@ export class EditorHelper {
     // 按照插件注册名称查找插件，否则遍历插件使用match逻辑
     renderElement(props: RenderElementProps) {
         const { element, attributes, children } = props;
+
+        return <div {...attributes} style={{ position: 'relative' }} > {children} </div>;
+
         const type = (element as any).type as string;
         const elePlugin = this.elementPluginMap.get(type) || this.plugins.find((p) => p.match?.(props));
         return (
@@ -47,13 +50,15 @@ export class EditorHelper {
 
         let leafNode = <span {...attributes} > {children} </span>;
 
+        return leafNode;
+
         this.plugins.forEach((plugin) => {
             const name = plugin.name;
             if (plugin.type === PluginType.Element && plugin.matchLeaf?.(props) || (leaf as any)[name]) {
                 leafNode = plugin.renderLeaf?.({
                     ...props, attributes: {} as any,
                     children: leafNode,
-                }) || leafNode
+                }) || leafNode;
             }
         });
 

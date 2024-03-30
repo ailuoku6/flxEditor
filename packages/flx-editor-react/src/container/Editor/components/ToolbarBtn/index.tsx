@@ -1,8 +1,10 @@
 import React from "react";
 
-import { Element as SlateElement, Editor, Transforms, BaseEditor } from "slate";
+import { Element as SlateElement, Editor, Transforms, BaseEditor } from "flx-editor-base";
 
-import { ReactEditor, useSlate } from "slate-react";
+// import { ReactEditor, useSlate } from "slate-react";
+
+import { ReactEditor, useSlate } from "flx-editor-base";
 
 import { Button } from "antd";
 

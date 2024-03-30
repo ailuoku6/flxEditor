@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo } from "react";
 
-import { Editable, Slate } from "slate-react";
+// import { Editable, Slate } from "slate-react";
 
 // import { createEditor, Descendant } from "slate";
 // import { withHistory } from "slate-history";
@@ -12,14 +12,13 @@ import { Editable, Slate } from "slate-react";
 // import { ItalicPlugin } from "./plugins/Italic";
 
 import "./index.scss";
-import { IFlxEditorPlugin, initFlxEditor } from "flx-editor-base";
-import { Descendant } from "slate";
+import { IFlxEditorPlugin, initFlxEditor, Descendant, Editable, Slate, BoldPlugin, UnderlinePlugin } from "flx-editor-base";
+// import { Descendant } from "slate";
 
-// import { BoldPlugin, UnderlinePlugin } from "flx-editor-base";
 import Toolbar from "./components/Toolbar";
 
 const initValue: Descendant[] = [
-  { type: "paragraph", children: [{ text: "" }] },
+  { type: "paragraph", children: [{ text: "131" }] },
 ] as any;
 
 const plugins: IFlxEditorPlugin[] = [
@@ -52,11 +51,12 @@ export default function FlxEditor() {
     <Slate editor={editor} initialValue={initValue}>
       <div className={"flx-editor-wrap"}>
         {/* {editorHelper.renderToolBar()} */}
-        {toolbar}
+        {/* {toolbar} */}
         <Editable
           className="flx-editor"
-          renderElement={editorHelper.renderElement}
-          renderLeaf={editorHelper.renderLeaf}
+
+          // renderElement={editorHelper.renderElement}
+          // renderLeaf={editorHelper.renderLeaf}
           placeholder="Enter some rich text…"
           spellCheck
           autoFocus
