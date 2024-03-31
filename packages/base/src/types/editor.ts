@@ -36,5 +36,7 @@ export interface IFlxEditorPlugin extends IBasePlugin {
     eventHandles?: { [key: string]: (args: any[]) => boolean };
 }
 
+export type PluginFactory<T extends Record<string, any> = {}> = (args: { editor: ReactEditor } & T) => IFlxEditorPlugin
+
 
 

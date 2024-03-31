@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { IFlxEditorPlugin, PluginType, useSlate, Transforms } from 'flx-editor-base';
+import { IFlxEditorPlugin, PluginType, PluginFactory, useSlate, Transforms } from 'flx-editor-base';
 
 import './index.css';
 
@@ -18,17 +18,19 @@ const BasicButton = () => {
     </button>
 }
 
-export const ResumeTitlePlugin: IFlxEditorPlugin = {
-    name: PluginName,
-    type: PluginType.Element,
-    renderElement: (props) => {
-        return <div {...props.attributes} className='resume-title'>
-            {props.children}
-        </div>
-    },
-    widget: {
-        toolBarWidget: (
-            <BasicButton />
-        ),
-    },
+export const ResumeTitlePluginFactory: PluginFactory = ({ editor }) => {
+    return {
+        name: PluginName,
+        type: PluginType.Element,
+        renderElement: (props) => {
+            return <div {...props.attributes} className='resume-title'>
+                {props.children}
+            </div>
+        },
+        widget: {
+            toolBarWidget: (
+                <BasicButton />
+            ),
+        },
+    }
 }

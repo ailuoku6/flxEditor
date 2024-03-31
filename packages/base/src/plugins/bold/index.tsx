@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { IFlxEditorPlugin, PluginType } from '../../types';
+import { IFlxEditorPlugin, PluginType, PluginFactory } from '../../types';
 
 import { isMarkActive, toggleMark } from '../../utils';
 import { ReactEditor, useSlate } from 'slate-react';
@@ -8,20 +8,21 @@ import { MarkButton } from '../../common/components';
 
 const PluginName = "bold";
 
+export const BoldPluginFactory: PluginFactory = ({ editor }) => {
+    return {
+        name: PluginName,
+        type: PluginType.Leaf,
+        renderLeaf: (props) => {
+            const { leaf } = props;
+            if ((leaf as any)[PluginName]) {
+                return <strong {...props.attributes}>{props.children}</strong>;
+            }
+        },
 
-export const BoldPlugin: IFlxEditorPlugin = {
-    name: PluginName,
-    type: PluginType.Leaf,
-    renderLeaf: (props) => {
-        const { leaf } = props;
-        if ((leaf as any)[PluginName]) {
-            return <strong {...props.attributes}>{props.children}</strong>;
-        }
-    },
-
-    widget: {
-        toolBarWidget: (
-            <MarkButton key={PluginName} format={PluginName} icon='blod' />
-        ),
-    },
+        widget: {
+            toolBarWidget: (
+                <MarkButton key={PluginName} format={PluginName} icon='blod' />
+            ),
+        },
+    }
 }

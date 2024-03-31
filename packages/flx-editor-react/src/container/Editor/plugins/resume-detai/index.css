@@ -1,5 +1,11 @@
 .resume-detail {
     padding-left: 20px;
+    /* display: flex;
+    justify-content: space-between; */
+}
+
+.detail-basewrap {
+    width: 100%;
     display: flex;
     justify-content: space-between;
 }
@@ -17,5 +23,17 @@
 
 .resume-detail-content {
     width: 100%;
+}
+
+.resume-detail-input {
+    background: none;
+    border: none;
+    outline: none;
+}
+
+.resume-detail-input:focus {
+    background: none;
+    border: none;
+    outline: none;
 }
 

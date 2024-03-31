@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { IFlxEditorPlugin, PluginType } from "../types";
+import { IFlxEditorPlugin, PluginFactory, PluginType } from "../types";
 import { HistoryEditor, withHistory } from "slate-history";
 
 import { BaseEditor, BaseElement, createEditor } from 'slate';
@@ -9,7 +9,10 @@ import { ReactEditor, RenderElementProps, RenderLeafProps, withReact } from "sla
 export class EditorHelper {
     private plugins: IFlxEditorPlugin[];
     private elementPluginMap: Map<string, IFlxEditorPlugin>;
-    constructor(editor: ReactEditor, plugins: IFlxEditorPlugin[]) {
+    constructor(editor: ReactEditor, pluginFactorys: (({ editor }: { editor: ReactEditor }) => IFlxEditorPlugin)[]) {
+
+        const plugins = pluginFactorys.map(genPlugin => genPlugin({ editor }));
+
         this.plugins = plugins.sort((a, b) => (a.priority || 0) - (b.priority || 0));
 
         this.elementPluginMap = new Map(
@@ -71,6 +74,8 @@ export class EditorHelper {
         return elePlugin?.isVoid || false;
     }
 
+
+
     // renderToolBar() {
     //   const toolBarWidgets = this.plugins
     //     .filter((p) => p.widget?.toolBarWidget)
@@ -80,8 +85,8 @@ export class EditorHelper {
     // }
 };
 
-export const initFlxEditor = (plugins: IFlxEditorPlugin[]): [BaseEditor & ReactEditor & HistoryEditor, EditorHelper] => {
+export const initFlxEditor = (factorys: PluginFactory[]): [BaseEditor & ReactEditor & HistoryEditor, EditorHelper] => {
     const editor = withHistory(withReact(createEditor()));
-    const editorHelper = new EditorHelper(editor, plugins);
+    const editorHelper = new EditorHelper(editor, factorys);
     return [editor, editorHelper];
 }

@@ -12,11 +12,11 @@ import React, { useEffect, useMemo } from "react";
 // import { ItalicPlugin } from "./plugins/Italic";
 
 import "./index.scss";
-import { IFlxEditorPlugin, initFlxEditor, Descendant, Editable, Slate, BoldPlugin, UnderlinePlugin } from "flx-editor-base";
+import { IFlxEditorPlugin, initFlxEditor, Descendant, Editable, Slate, BoldPluginFactory, UnderlinePluginFactory, PluginFactory } from "flx-editor-base";
 
-import { ResumeBasicPlugin } from "./plugins/resume-basic";
-import { ResumeTitlePlugin } from "./plugins/resume-title";
-import { ResumeDetailPlugin } from "./plugins/resume-detai";
+import { ResumeBasicPluginFactory } from "./plugins/resume-basic";
+import { ResumeTitlePluginFactory } from "./plugins/resume-title";
+import { ResumeDetailPluginFactory } from "./plugins/resume-detai";
 // import { Descendant } from "slate";
 
 import Toolbar from "./components/Toolbar";
@@ -25,12 +25,12 @@ const initValue: Descendant[] = [
   { type: "paragraph", children: [{ text: "" }] },
 ] as any;
 
-const plugins: IFlxEditorPlugin[] = [
-  BoldPlugin,
-  UnderlinePlugin,
-  ResumeBasicPlugin,
-  ResumeTitlePlugin,
-  ResumeDetailPlugin
+const pluginFactorys: PluginFactory[] = [
+  BoldPluginFactory,
+  UnderlinePluginFactory,
+  ResumeBasicPluginFactory,
+  ResumeTitlePluginFactory,
+  ResumeDetailPluginFactory
   // ItalicPlugin,
 ];
 
@@ -40,7 +40,7 @@ export default function FlxEditor() {
     // const editor = withHistory(withReact(createEditor()));
     // const editorHelper = new EditorHelper(editor, plugins);
     // return [editor, editorHelper];
-    return initFlxEditor(plugins);
+    return initFlxEditor(pluginFactorys);
   }, []);
 
   useEffect(() => {
@@ -64,6 +64,9 @@ export default function FlxEditor() {
           className="flx-editor"
           renderElement={editorHelper.renderElement}
           renderLeaf={editorHelper.renderLeaf}
+          // onKeyDown={()=>{
+
+          // }}
           placeholder="Enter some rich text…"
           spellCheck
           autoFocus

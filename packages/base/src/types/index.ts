@@ -13,6 +13,7 @@ export interface BlockElement {
     children: BaseNode[];
     type?: string;
     className?: string;
+    id?: string;
     [key: string]: unknown;
 }
 
@@ -20,6 +21,7 @@ export interface TextElement {
     text: string;
     leafType?: string;
     className?: string;
+    id?: string;
     [key: string]: unknown;
 }
 

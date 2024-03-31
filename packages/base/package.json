@@ -13,7 +13,8 @@
   "dependencies": {
     "slate": "^0.94.1",
     "slate-history": "^0.93.0",
-    "slate-react": "^0.97.2"
+    "slate-react": "^0.97.2",
+    "uuid": "^9.0.1"
   },
   "peerDependencies": {
     "@types/react": "^18.0.0",
@@ -22,6 +23,7 @@
   "devDependencies": {
     "@babel/core": "^7.24.3",
     "@babel/preset-env": "^7.24.3",
-    "@babel/preset-typescript": "^7.24.1"
+    "@babel/preset-typescript": "^7.24.1",
+    "@types/uuid": "^9.0.8"
   }
 }

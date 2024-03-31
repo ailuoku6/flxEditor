@@ -1,4 +1,4 @@
-import { IFlxEditorPlugin, PluginType, useSlate, Transforms } from 'flx-editor-base';
+import { IFlxEditorPlugin, PluginType, useSlate, Transforms, PluginFactory } from 'flx-editor-base';
 
 import React from 'react';
 import './index.css';
@@ -25,32 +25,35 @@ const BasicButton = () => {
     </button>
 }
 
-export const ResumeBasicPlugin: IFlxEditorPlugin = {
-    name: PluginName,
-    type: PluginType.Element,
+export const ResumeBasicPluginFactory: PluginFactory = ({ editor }) => {
+    return {
+        name: PluginName,
+        type: PluginType.Element,
 
-    matchLeaf: (props) => {
-        const { leaf } = props;
-        return totalBasic.some((name) => (leaf.leafType) === name);
-    },
+        matchLeaf: (props) => {
+            const { leaf } = props;
+            return totalBasic.some((name) => (leaf.leafType) === name);
+        },
 
-    renderElement: (props) => {
-        return <div {...props.attributes} className='resume-basic-wrapper'>
-            {props.children}
-        </div>
-    },
+        renderElement: (props) => {
+            return <div {...props.attributes} className='resume-basic-wrapper'>
+                {props.children}
+            </div>
+        },
 
-    renderLeaf: (props) => {
-        const { leaf } = props;
-        const field = totalBasic.find((name) => (leaf.leafType) === name);
-        if (field) {
-            return <span {...props.attributes} className={field}>{props.children}</span>;
-        }
-    },
+        renderLeaf: (props) => {
+            const { leaf } = props;
+            const field = totalBasic.find((name) => (leaf.leafType) === name);
+            if (field) {
+                return <span {...props.attributes} className={field}>{props.children}</span>;
+            }
+        },
 
-    widget: {
-        toolBarWidget: (
-            <BasicButton />
-        ),
-    },
+        widget: {
+            toolBarWidget: (
+                <BasicButton />
+            ),
+        },
+    }
 }
+
