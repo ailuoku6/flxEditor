@@ -30,7 +30,7 @@ const BasicButton = () => {
     </button>
 }
 
-const CustomInput = ({ value, id, field }: { value?: string, id: string, field: string }) => {
+const CustomInput = ({ value, id, field, className }: { value?: string, id: string, field: string; className?: string }) => {
 
     const editor = useSlate();
 
@@ -39,7 +39,7 @@ const CustomInput = ({ value, id, field }: { value?: string, id: string, field: 
         Transforms.setNodes(editor, newProperties, { match: n => SlateNode.isNode(n) && (n as any).id === id });
     }
 
-    return <input className='resume-detail-input' value={value} onChange={(e) => handleChange(e.target.value)} />
+    return <input className={`resume-detail-input ${className}`} value={value} onChange={(e) => handleChange(e.target.value)} />
 }
 
 export const ResumeDetailPluginFactory: PluginFactory = ({ editor }) => {
@@ -54,8 +54,8 @@ export const ResumeDetailPluginFactory: PluginFactory = ({ editor }) => {
 
             return <div {...props.attributes} className='resume-detail'>
                 <div contentEditable={false} className='detail-basewrap'>
-                    <CustomInput value={title} id={id} field='title' />
-                    <CustomInput value={date} id={id} field='date' />
+                    <CustomInput value={title} id={id} field='title' className='resume-detail-title' />
+                    <CustomInput value={date} id={id} field='date' className='resume-detail-date' />
                     {/* <div >{title}</div>
                     <div>{date}</div> */}
                 </div>
