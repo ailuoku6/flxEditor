@@ -1,16 +1,5 @@
 import React, { useEffect, useMemo } from "react";
 
-// import { Editable, Slate } from "slate-react";
-
-// import { createEditor, Descendant } from "slate";
-// import { withHistory } from "slate-history";
-
-// import { EditorHelper, IFlxEditorPlugin } from "./editorHelper";
-
-// import { BoldTextPlugin } from "./plugins/BoldText";
-// import { UnderlinePlugin } from "./plugins/Underline";
-// import { ItalicPlugin } from "./plugins/Italic";
-
 import "./index.scss";
 import { IFlxEditorPlugin, initFlxEditor, Descendant, Editable, Slate, BoldPluginFactory, UnderlinePluginFactory, PluginFactory } from "flx-editor-base";
 
@@ -21,9 +10,11 @@ import { ResumeDetailPluginFactory } from "./plugins/resume-detai";
 
 import Toolbar from "./components/Toolbar";
 
+const LocalDocDataKey = 'flx-resume-editor-doc-data';
+
 const initValue: Descendant[] = [
   { type: "paragraph", children: [{ text: "" }] },
-] as any;
+];
 
 const pluginFactorys: PluginFactory[] = [
   BoldPluginFactory,
@@ -37,9 +28,6 @@ const pluginFactorys: PluginFactory[] = [
 
 export default function FlxEditor() {
   const [editor, editorHelper] = useMemo(() => {
-    // const editor = withHistory(withReact(createEditor()));
-    // const editorHelper = new EditorHelper(editor, plugins);
-    // return [editor, editorHelper];
     return initFlxEditor(pluginFactorys);
   }, []);
 
@@ -53,25 +41,42 @@ export default function FlxEditor() {
       .map((p) => p.widget?.toolBarWidget);
 
     return <Toolbar>{toolBarWidgets}</Toolbar>;
-  }, [])
+  }, []);
+
+  const localData = useMemo(() => {
+    const localData = localStorage.getItem(LocalDocDataKey);
+    if (localData) {
+      return JSON.parse(localData);
+    }
+    return initValue;
+  }, []);
+
+  const handleSave = () => {
+    localStorage.setItem(LocalDocDataKey, JSON.stringify(editor.children));
+  }
+
+  const handleChange = (value: Descendant[]) => {
+
+  }
 
   return (
-    <Slate editor={editor} initialValue={initValue}>
-      <div className={"flx-editor-wrap"}>
-        {/* {editorHelper.renderToolBar()} */}
-        {toolbar}
-        <Editable
-          className="flx-editor"
-          renderElement={editorHelper.renderElement}
-          renderLeaf={editorHelper.renderLeaf}
-          // onKeyDown={()=>{
-
-          // }}
-          placeholder="Enter some rich text…"
-          spellCheck
-          autoFocus
-        />
-      </div>
-    </Slate>
+    <div>
+      <Slate editor={editor} initialValue={localData} onChange={handleChange}>
+        <div className={"flx-editor-wrap"}>
+          {/* {editorHelper.renderToolBar()} */}
+          {toolbar}
+          <Editable
+            className="flx-editor"
+            renderElement={editorHelper.renderElement}
+            renderLeaf={editorHelper.renderLeaf}
+            onKeyDown={editorHelper.onKeyDown}
+            placeholder="Enter some rich text…"
+            spellCheck
+            autoFocus
+          />
+        </div>
+      </Slate>
+      <div className="save-btn" onClick={handleSave}>save</div>
+    </div>
   );
 }

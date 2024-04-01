@@ -22,6 +22,7 @@ export class EditorHelper {
         this.renderElement = this.renderElement.bind(this);
         this.renderLeaf = this.renderLeaf.bind(this);
         this.isVoid = this.isVoid.bind(this);
+        this.onKeyDown = this.onKeyDown.bind(this);
 
         this.initEditorHelper(editor);
     }
@@ -66,6 +67,17 @@ export class EditorHelper {
         // return leafNode;
 
         return <span {...attributes} className='testgy1'>{leafNode}</span>;
+    }
+
+    onKeyDown(event: React.KeyboardEvent<HTMLDivElement>) {
+        if (event.nativeEvent.isComposing) return void 0;
+        for (const item of this.plugins) {
+            const onKeyDownEvent = item.eventHandles?.['onKeyDown'];
+            if (onKeyDownEvent?.(event)) {
+                event.preventDefault();
+                break;
+            }
+        }
     }
 
     private isVoid(ele: BaseElement) {

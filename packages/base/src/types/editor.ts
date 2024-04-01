@@ -33,7 +33,7 @@ export interface IFlxEditorPlugin extends IBasePlugin {
     };
 
     // 事件处理，如果返回true，则不再继续传递给下一个插件
-    eventHandles?: { [key: string]: (args: any[]) => boolean };
+    eventHandles?: { [key: string]: (event: React.KeyboardEvent<HTMLDivElement>) => boolean };
 }
 
 export type PluginFactory<T extends Record<string, any> = {}> = (args: { editor: ReactEditor } & T) => IFlxEditorPlugin

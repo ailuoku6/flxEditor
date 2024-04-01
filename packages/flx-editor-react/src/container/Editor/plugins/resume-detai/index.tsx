@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-import { IFlxEditorPlugin, PluginType, PluginFactory, useSlate, Transforms, genUUID, Node as SlateNode } from 'flx-editor-base';
+import { IFlxEditorPlugin, PluginType, PluginFactory, useSlate, Transforms, genUUID, Node as SlateNode, Text as SlateText } from 'flx-editor-base';
 
 import './index.css';
 
@@ -23,7 +23,7 @@ const BasicButton = () => {
             id: genUUID(PluginName),
             title: '',
             date: '',
-            children: [{ text: ' ', leafType: resumeDetailContent }]
+            children: [{ type: 'paragraph', children: [{ text: '', leafType: resumeDetailContent }] }]
         });
     }}>
         resume-detail
@@ -85,8 +85,47 @@ export const ResumeDetailPluginFactory: PluginFactory = ({ editor }) => {
             ),
         },
 
-        eventHandles: {
+        // eventHandles: {
+        //     onKeyDown: (e) => {
+        //         if (e.key === 'Enter') {
+        //             // e.preventDefault();
+        //             // const text = { text: '' };
+        //             // const paragraph = { type: 'paragraph', children: [text] };
+        //             // Transforms.insertNodes(editor, paragraph);
 
-        }
+        //             // 判断选区所处对象
+        //             const { selection } = editor;
+        //             if (selection) {
+        //                 // 获取选区的开始位置对应的节点
+        //                 let startNode = SlateNode.get(editor, selection.anchor.path);
+        //                 console.log('---startNode', startNode);
+
+        //                 // 获取选区的结束位置对应的节点
+        //                 let endNode = SlateNode.get(editor, selection.focus.path);
+        //                 console.log('-----endNode', endNode);
+
+        //                 if ((startNode as any).leafType === resumeDetailContent) {
+        //                     // Transforms.splitNodes(editor);
+        //                     Transforms.splitNodes(editor, {
+        //                         at: selection.anchor, match: n => {
+        //                             const v = SlateText.isText(n);
+        //                             return v;
+        //                             // return (n as any).type === PluginName;
+        //                         }
+        //                     });
+        //                     // Transforms.setNodes(editor, { children: [{ text: '90' }] }, {
+        //                     //     at: selection, match: n => {
+        //                     //         const v = (n as any).type === PluginName;
+        //                     //         return v;
+        //                     //     }
+        //                     // });
+        //                     return true;
+        //                 }
+        //             }
+        //         }
+
+        //         return false;
+        //     }
+        // }
     }
 }
