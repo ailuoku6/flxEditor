@@ -50,8 +50,9 @@ export class EditorHelper {
     renderLeaf(props: RenderLeafProps) {
         const { attributes, children, leaf } = props;
 
-        // let leafNode = <span {...attributes}>{children}</span>;
         let leafNode = children;
+
+        const context = { classNames: [] };
 
 
         this.plugins.forEach((plugin) => {
@@ -60,19 +61,17 @@ export class EditorHelper {
                 leafNode = plugin.renderLeaf?.({
                     ...props, attributes: {} as any,
                     children: leafNode,
-                }) || leafNode;
+                }, context) || leafNode;
             }
         });
 
-        // return leafNode;
-
-        return <span {...attributes} className='testgy1'>{leafNode}</span>;
+        return <span {...attributes} className={context.classNames.join(' ')}>{leafNode}</span>;
     }
 
     onKeyDown(event: React.KeyboardEvent<HTMLDivElement>) {
         if (event.nativeEvent.isComposing) return void 0;
         for (const item of this.plugins) {
-            const onKeyDownEvent = item.eventHandles?.['onKeyDown'];
+            const onKeyDownEvent = item.onKeyDown;
             if (onKeyDownEvent?.(event)) {
                 event.preventDefault();
                 break;
