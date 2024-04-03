@@ -5,7 +5,7 @@
     justify-content: space-between; */
 }
 
-.detail-basewrap {
+.resume-detail-title-date-wrap {
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -35,7 +35,7 @@
     margin-bottom: 10px;
 }
 
-.resume-detail-input {
+/* .resume-detail-input {
     background: none;
     border: none;
     outline: none;
@@ -45,5 +45,5 @@
     background: none;
     border: none;
     outline: none;
-}
+} */
 

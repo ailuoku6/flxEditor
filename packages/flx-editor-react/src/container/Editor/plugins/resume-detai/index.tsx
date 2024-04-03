@@ -7,12 +7,14 @@ import './index.css';
 
 const PluginName = 'resume-detail';
 
+const resumeDetailTitleDateWrap = 'resume-detail-title-date-wrap';
+
 const resumeDetailTitle = 'resume-detail-title';
 const resumeDetailDate = 'resume-detail-date';
 
 const resumeDetailContent = 'resume-detail-content';
 
-const totalDetailField = [resumeDetailContent];
+const totalDetailElementField = [PluginName, resumeDetailTitleDateWrap, resumeDetailTitle, resumeDetailDate, resumeDetailContent];
 
 const BasicButton = () => {
     const editor = useSlate();
@@ -20,63 +22,33 @@ const BasicButton = () => {
     return <button onClick={() => {
         Transforms.insertNodes(editor, {
             type: PluginName,
-            id: genUUID(PluginName),
-            title: '',
-            date: '',
-            children: [{ type: 'paragraph', children: [{ text: '', leafType: resumeDetailContent }] }]
+            children: [{
+                type: resumeDetailTitleDateWrap,
+                children: [
+                    { type: resumeDetailTitle, children: [{ text: '' }] },
+                    { type: resumeDetailDate, children: [{ text: '' }] }
+                ]
+            }, { type: resumeDetailContent, children: [{ text: '' }] }]
         });
     }}>
         resume-detail
     </button>
 }
 
-const CustomInput = ({ value, id, field, className }: { value?: string, id: string, field: string; className?: string }) => {
-
-    const editor = useSlate();
-
-    const handleChange = (newValue: string) => {
-        const newProperties = { [field]: newValue };
-        Transforms.setNodes(editor, newProperties, { match: n => SlateNode.isNode(n) && (n as any).id === id });
-    }
-
-    return <input className={`resume-detail-input ${className}`} value={value} onChange={(e) => handleChange(e.target.value)} />
-}
-
 export const ResumeDetailPluginFactory: PluginFactory = ({ editor }) => {
     return {
         name: PluginName,
         type: PluginType.Element,
+        match: (props) => {
+            return totalDetailElementField.some((name) => (props.element.type) === name);
+        },
         renderElement: (props) => {
 
-            const { title, date, id } = props.element as unknown as { title: string; date: string; id: string };
+            const { type } = props.element;
 
-            console.info('--------ResumedetailElement', props)
-
-            return <div {...props.attributes} className='resume-detail'>
-                <div contentEditable={false} className='detail-basewrap'>
-                    <CustomInput value={title} id={id} field='title' className='resume-detail-title' />
-                    <CustomInput value={date} id={id} field='date' className='resume-detail-date' />
-                    {/* <div >{title}</div>
-                    <div>{date}</div> */}
-                </div>
-                <div>
-                    {props.children}
-                </div>
-
+            return <div {...props.attributes} className={type}>
+                {props.children}
             </div>
-        },
-
-        matchLeaf: (props) => {
-            const { leaf } = props;
-            return totalDetailField.some((name) => (leaf.leafType) === name);
-        },
-
-        renderLeaf: (props) => {
-            const { leaf } = props;
-            const field = totalDetailField.find((name) => (leaf.leafType) === name);
-            if (field) {
-                return <span {...props.attributes} className={field}>{props.children}</span>;
-            }
         },
 
         widget: {
@@ -85,6 +57,7 @@ export const ResumeDetailPluginFactory: PluginFactory = ({ editor }) => {
             ),
         },
 
+        // TODO: 限制删除，回车行为
         // eventHandles: {
         //     onKeyDown: (e) => {
         //         if (e.key === 'Enter') {

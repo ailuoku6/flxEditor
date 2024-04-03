@@ -23,6 +23,7 @@ type BooleanEventHandlers<T> = {
     [K in keyof T]: T[K] extends (...args: any[]) => any ? (event: ExtractParameter<T[K]>) => boolean : never;
 }
 
+// 事件处理，如果返回true，则不再继续传递给下一个插件
 export type EditorEvents = Partial<BooleanEventHandlers<Required<Pick<EditableProps, 'onKeyDown' | 'onCopy' | 'onPaste'>>>>;
 
 export interface IRenderLeafContext {
@@ -48,11 +49,6 @@ export interface IFlxEditorPlugin extends IBasePlugin, EditorEvents {
             value?: string;
         }
     };
-
-    // 事件处理，如果返回true，则不再继续传递给下一个插件
 }
 
 export type PluginFactory<T extends Record<string, any> = {}> = (args: { editor: ReactEditor } & T) => IFlxEditorPlugin
-
-
-
