@@ -80,3 +80,15 @@ export const toggleBlock = (editor: ReactEditor, format: string) => {
     // }
 }
 
+// 实现基本基本util，根据selection获取当前选中的叶子节点，以及父节点（包括祖先节点）
+export const getLeafNode = (editor: ReactEditor) => {
+    const { selection } = editor;
+    if (!selection) return null;
+    const nodes = Array.from(Editor.nodes(editor, {
+        at: selection,
+    })).filter(([node]) => {
+        return !Editor.isEditor(node);
+    });
+    return nodes;
+}
+
