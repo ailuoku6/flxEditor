@@ -1,4 +1,4 @@
-import { IFlxEditorPlugin, PluginType, useSlate, Transforms, PluginFactory } from 'flx-editor-base';
+import { IFlxEditorPlugin, PluginType, useSlate, Transforms, PluginFactory, LeafPlaceholder } from 'flx-editor-base';
 
 import React from 'react';
 import './index.css';
@@ -17,7 +17,7 @@ const BasicButton = () => {
     return <button onClick={() => {
         Transforms.insertNodes(editor, {
             type: PluginName, children: totalBasic.map(field => {
-                return { type: field, children: [{ text: '' }] }
+                return { type: field, children: [{ text: '', leafType: field }] }
             })
         });
     }}>
@@ -40,18 +40,21 @@ export const ResumeBasicPluginFactory: PluginFactory = ({ editor }) => {
             </div>
         },
 
-        // matchLeaf: (props) => {
-        //     const { leaf } = props;
-        //     return totalBasic.some((name) => (leaf.leafType) === name);
-        // },
+        matchLeaf: (props) => {
+            const { leaf } = props;
+            return totalBasic.some((name) => (leaf.leafType) === name);
+        },
 
-        // renderLeaf: (props) => {
-        //     const { leaf } = props;
-        //     const field = totalBasic.find((name) => (leaf.leafType) === name);
-        //     if (field) {
-        //         return <span {...props.attributes} className={field}>{props.children}</span>;
-        //     }
-        // },
+        renderLeaf: (props) => {
+            if (props.leaf.text === '') {
+                return <>
+                    <LeafPlaceholder placeholder='enter some text...' />
+                    {props.children}
+                </>
+            }
+
+            return props.children;
+        },
 
         widget: {
             toolBarWidget: (

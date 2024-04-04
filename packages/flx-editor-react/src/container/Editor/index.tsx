@@ -8,7 +8,9 @@ import { ResumeTitlePluginFactory } from "./plugins/resume-title";
 import { ResumeDetailPluginFactory } from "./plugins/resume-detai";
 // import { Descendant } from "slate";
 
-import Toolbar from "./components/Toolbar";
+import { EditorToolbar } from "flx-editor-base";
+
+// import Toolbar from "./components/Toolbar";
 
 const LocalDocDataKey = 'flx-resume-editor-doc-data';
 
@@ -36,11 +38,12 @@ export default function FlxEditor() {
   }, []);
 
   const toolbar = useMemo(() => {
-    const toolBarWidgets = editorHelper.getPlugins()
-      .filter((p) => p.widget?.toolBarWidget)
-      .map((p) => p.widget?.toolBarWidget);
+    // const toolBarWidgets = editorHelper.getPlugins()
+    //   .filter((p) => p.widget?.toolBarWidget)
+    //   .map((p) => p.widget?.toolBarWidget);
 
-    return <Toolbar>{toolBarWidgets}</Toolbar>;
+    // return <Toolbar>{toolBarWidgets}</Toolbar>;
+    return <EditorToolbar plugins={editorHelper.getPlugins()} />
   }, []);
 
   const localData = useMemo(() => {

@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-import { IFlxEditorPlugin, PluginType, PluginFactory, useSlate, Transforms, genUUID, Node as SlateNode, Text as SlateText } from 'flx-editor-base';
+import { IFlxEditorPlugin, PluginType, PluginFactory, useSlate, Transforms, genUUID, Node as SlateNode, Text as SlateText, LeafPlaceholder } from 'flx-editor-base';
 
 import './index.css';
 
@@ -14,6 +14,8 @@ const resumeDetailDate = 'resume-detail-date';
 
 const resumeDetailContent = 'resume-detail-content';
 
+const totalEditField = [resumeDetailTitle, resumeDetailDate, resumeDetailContent];
+
 const totalDetailElementField = [PluginName, resumeDetailTitleDateWrap, resumeDetailTitle, resumeDetailDate, resumeDetailContent];
 
 const BasicButton = () => {
@@ -25,10 +27,10 @@ const BasicButton = () => {
             children: [{
                 type: resumeDetailTitleDateWrap,
                 children: [
-                    { type: resumeDetailTitle, children: [{ text: '' }] },
-                    { type: resumeDetailDate, children: [{ text: '' }] }
+                    { type: resumeDetailTitle, children: [{ text: '', leafType: resumeDetailTitle }] },
+                    { type: resumeDetailDate, children: [{ text: '', leafType: resumeDetailDate }] }
                 ]
-            }, { type: resumeDetailContent, children: [{ text: '' }] }]
+            }, { type: resumeDetailContent, children: [{ text: '', leafType: resumeDetailContent }] }]
         });
     }}>
         resume-detail
@@ -49,6 +51,22 @@ export const ResumeDetailPluginFactory: PluginFactory = ({ editor }) => {
             return <div {...props.attributes} className={type}>
                 {props.children}
             </div>
+        },
+
+        matchLeaf(props) {
+            return totalEditField.some((name) => (props.leaf.leafType) === name);
+        },
+
+        renderLeaf(props, context) {
+
+            if (props.leaf.text === '') {
+                return <>
+                    <LeafPlaceholder placeholder='enter some text...' />
+                    {props.children}
+                </>
+            }
+
+            return props.children;
         },
 
         widget: {
