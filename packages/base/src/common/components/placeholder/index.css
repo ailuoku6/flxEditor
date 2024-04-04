@@ -1,0 +1,11 @@
+.leaf-placeholder {
+    position: absolute;
+    /* top: 0px; */
+    pointer-events: none;
+    width: 100%;
+    max-width: 100%;
+    display: block;
+    opacity: 0.333;
+    user-select: none;
+    text-decoration: none;
+}
