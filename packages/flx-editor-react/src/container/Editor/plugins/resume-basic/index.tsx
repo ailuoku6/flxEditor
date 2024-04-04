@@ -17,7 +17,7 @@ const BasicButton = () => {
     return <button onClick={() => {
         Transforms.insertNodes(editor, {
             type: PluginName, children: totalBasic.map(field => {
-                return { text: ' ', leafType: field }
+                return { type: field, children: [{ text: '' }] }
             })
         });
     }}>
@@ -30,24 +30,28 @@ export const ResumeBasicPluginFactory: PluginFactory = ({ editor }) => {
         name: PluginName,
         type: PluginType.Element,
 
-        matchLeaf: (props) => {
-            const { leaf } = props;
-            return totalBasic.some((name) => (leaf.leafType) === name);
+        match: (props) => {
+            return props.element.type === PluginName || totalBasic.some((name) => (props.element.type) === name);
         },
 
         renderElement: (props) => {
-            return <div {...props.attributes} className='resume-basic-wrapper'>
+            return <div {...props.attributes} className={props.element.type}>
                 {props.children}
             </div>
         },
 
-        renderLeaf: (props) => {
-            const { leaf } = props;
-            const field = totalBasic.find((name) => (leaf.leafType) === name);
-            if (field) {
-                return <span {...props.attributes} className={field}>{props.children}</span>;
-            }
-        },
+        // matchLeaf: (props) => {
+        //     const { leaf } = props;
+        //     return totalBasic.some((name) => (leaf.leafType) === name);
+        // },
+
+        // renderLeaf: (props) => {
+        //     const { leaf } = props;
+        //     const field = totalBasic.find((name) => (leaf.leafType) === name);
+        //     if (field) {
+        //         return <span {...props.attributes} className={field}>{props.children}</span>;
+        //     }
+        // },
 
         widget: {
             toolBarWidget: (

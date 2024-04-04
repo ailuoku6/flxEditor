@@ -8,6 +8,8 @@ import { MarkButton } from '../../common/components';
 
 const PluginName = "bold";
 
+import { GoBold } from "react-icons/go";
+
 export const BoldPluginFactory: PluginFactory = ({ editor }) => {
     return {
         name: PluginName,
@@ -21,7 +23,7 @@ export const BoldPluginFactory: PluginFactory = ({ editor }) => {
 
         widget: {
             toolBarWidget: (
-                <MarkButton key={PluginName} format={PluginName} icon='blod' />
+                <MarkButton key={PluginName} format={PluginName} icon={<GoBold />} />
             ),
         },
     }

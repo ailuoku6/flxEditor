@@ -1,0 +1,31 @@
+.base-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 24px;
+    width: 24px;
+
+    padding: 4px;
+
+    border-radius: 6px;
+
+    cursor: pointer;
+
+    transition: all 0.2s;
+}
+
+.base-button:hover {
+    background-color: aquamarine;
+}
+
+.base-button-disabled {
+    cursor: not-allowed;
+}
+
+.base-button-disabled:hover {
+    background-color: transparent;
+}
+
+.base-button-selected {
+    background-color: aquamarine;
+}

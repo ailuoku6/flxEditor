@@ -1,0 +1,13 @@
+.toolbar-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20px;
+    gap: 4px;
+}
+
+.divider {
+    width: 1px;
+    height: 80%;
+    background-color: #383030;
+}
