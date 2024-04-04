@@ -4,7 +4,7 @@ import './index.css';
 
 interface Props {
     onMouseDown?: (e: React.MouseEvent) => void;
-    /** 推荐使用react-icons组件 */
+    /** 推荐使用@icon-park/react的icon */
     icon?: React.ReactNode;
     selected?: boolean;
     disabled?: boolean;

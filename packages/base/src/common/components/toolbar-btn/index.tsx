@@ -8,6 +8,7 @@ export const MarkButton = ({
     icon,
 }: {
     format: string;
+    /** 推荐使用@icon-park/react的icon */
     icon: React.ReactNode;
 }) => {
     const editor = useSlate();
@@ -27,6 +28,7 @@ export const MarkButton = ({
 
 export const BlockButton = ({ format, icon }: {
     format: string;
+    /** 推荐使用@icon-park/react的icon */
     icon: React.ReactNode;
 }) => {
     const editor = useSlate()

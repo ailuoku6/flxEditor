@@ -6,7 +6,7 @@ import { ReactEditor, useSlate } from "slate-react";
 
 import { MarkButton } from "../../common/components";
 
-import { FaUnderline } from "react-icons/fa6";
+import { TextUnderline } from '@icon-park/react';
 
 
 const PluginName = "underline";
@@ -23,7 +23,7 @@ export const UnderlinePluginFactory: PluginFactory = ({ editor }) => {
         },
         widget: {
             toolBarWidget: (
-                <MarkButton key={PluginName} format={PluginName} icon={<FaUnderline />} />
+                <MarkButton key={PluginName} format={PluginName} icon={<TextUnderline />} />
             ),
         },
     }

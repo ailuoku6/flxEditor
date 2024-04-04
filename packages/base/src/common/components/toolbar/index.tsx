@@ -21,7 +21,7 @@ export const EditorToolbar = ({ plugins, className }: { plugins: IFlxEditorPlugi
         }, new Map<string, React.ReactNode[]>());
     }, []);
 
-    return <div className={`toolbar-wrap ${className}`} >
+    return <div className={`toolbar-wrap ${className || ''}`} >
         {Array.from(categoryWidgets).map(([category, widgets], index) => {
             return <React.Fragment key={category}>
                 {widgets}

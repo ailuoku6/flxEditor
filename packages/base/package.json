@@ -11,7 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "react-icons": "^5.0.1",
+    "@icon-park/react": "^1.4.2",
     "slate": "^0.94.1",
     "slate-history": "^0.93.0",
     "slate-react": "^0.97.2",
