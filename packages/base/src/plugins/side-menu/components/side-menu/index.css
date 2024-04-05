@@ -1,0 +1,15 @@
+.pop-content {
+    width: 200px;
+    padding: 8px;
+    border-radius: 6px;
+    background-color: #fff;
+
+    border: 1px solid #ccc;
+}
+
+.widgets {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 4px;
+}

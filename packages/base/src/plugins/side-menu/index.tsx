@@ -6,6 +6,7 @@ import { EditorHelper } from "../../core";
 
 import { SideMenu } from "./components/side-menu";
 import { CustomTypes } from "slate";
+import { ReactEditor } from "slate-react";
 
 export const PluginName = "side-menu";
 
@@ -13,11 +14,13 @@ export const SideMenuPluginFactory: PluginFactory<{ editorHelper: EditorHelper }
     return {
         name: PluginName,
         type: PluginType.ElementWrap,
-        match({ element }) {
-            return new Set([...editor.children]).has(element);
-        },
+        match: () => true,
         renderElement(props, context) {
-            return <SideMenu renderElementProps={props} plugins={editorHelper.getPlugins()} />
+            const path = ReactEditor.findPath(editor, props.element);
+            if (path.length !== 1) {
+                return props.children;
+            }
+            return <SideMenu path={path} renderElementProps={props} plugins={editorHelper.getPlugins()} />
         },
     }
 }

@@ -74,6 +74,14 @@ p {
   font-family: 'oppo-sans';
   font-weight: 400;
 
+  border: 1px solid #ccc;
+
+  margin: auto;
+  margin-top: 50px;
+  max-width: 600px;
+
+  border-radius: 6px;
+
   padding: 40px;
   .flx-editor {
     outline: none;

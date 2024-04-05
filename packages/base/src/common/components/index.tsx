@@ -4,3 +4,5 @@ export * from './button';
 
 export * from './placeholder';
 
+export * from './float-menu';
+

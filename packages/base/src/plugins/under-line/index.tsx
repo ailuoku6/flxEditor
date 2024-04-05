@@ -25,6 +25,7 @@ export const UnderlinePluginFactory: PluginFactory = ({ editor }) => {
             toolBarWidget: (
                 <MarkButton key={PluginName} format={PluginName} icon={<TextUnderline />} />
             ),
+            renderWidgetOnPupup: true,
         },
     }
 }

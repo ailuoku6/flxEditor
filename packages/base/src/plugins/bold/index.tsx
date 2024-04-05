@@ -25,6 +25,7 @@ export const BoldPluginFactory: PluginFactory = ({ editor }) => {
             toolBarWidget: (
                 <MarkButton key={PluginName} format={PluginName} icon={<TextBold />} />
             ),
+            renderWidgetOnPupup: true,
         },
     }
 }

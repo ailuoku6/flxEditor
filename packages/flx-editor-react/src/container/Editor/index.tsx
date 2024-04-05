@@ -8,7 +8,7 @@ import { ResumeTitlePluginFactory } from "./plugins/resume-title";
 import { ResumeDetailPluginFactory } from "./plugins/resume-detai";
 // import { Descendant } from "slate";
 
-import { EditorToolbar } from "flx-editor-base";
+import { EditorToolbar, FloatMenu } from "flx-editor-base";
 
 // import Toolbar from "./components/Toolbar";
 
@@ -38,14 +38,14 @@ export default function FlxEditor() {
     (window as any).editor = editor;
   }, []);
 
-  const toolbar = useMemo(() => {
-    // const toolBarWidgets = editorHelper.getPlugins()
-    //   .filter((p) => p.widget?.toolBarWidget)
-    //   .map((p) => p.widget?.toolBarWidget);
+  // const toolbar = useMemo(() => {
+  //   // const toolBarWidgets = editorHelper.getPlugins()
+  //   //   .filter((p) => p.widget?.toolBarWidget)
+  //   //   .map((p) => p.widget?.toolBarWidget);
 
-    // return <Toolbar>{toolBarWidgets}</Toolbar>;
-    return <EditorToolbar plugins={editorHelper.getPlugins()} />
-  }, []);
+  //   // return <Toolbar>{toolBarWidgets}</Toolbar>;
+  //   return <EditorToolbar plugins={editorHelper.getPlugins()} />
+  // }, []);
 
   const localData = useMemo(() => {
     const localData = localStorage.getItem(LocalDocDataKey);
@@ -67,8 +67,7 @@ export default function FlxEditor() {
     <div>
       <Slate editor={editor} initialValue={localData} onChange={handleChange}>
         <div className={"flx-editor-wrap"}>
-          {/* {editorHelper.renderToolBar()} */}
-          {toolbar}
+          <FloatMenu editorHelper={editorHelper} />
           <Editable
             className="flx-editor"
             renderElement={editorHelper.renderElement}
