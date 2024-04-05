@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo } from "react";
 
 import "./index.scss";
-import { IFlxEditorPlugin, initFlxEditor, Descendant, Editable, Slate, BoldPluginFactory, UnderlinePluginFactory, PluginFactory } from "flx-editor-base";
+import { IFlxEditorPlugin, initFlxEditor, Descendant, Editable, Slate, BoldPluginFactory, UnderlinePluginFactory, SideMenuPluginFactory, PluginFactory } from "flx-editor-base";
 
 import { ResumeBasicPluginFactory } from "./plugins/resume-basic";
 import { ResumeTitlePluginFactory } from "./plugins/resume-title";
@@ -18,7 +18,8 @@ const initValue: Descendant[] = [
   { type: "paragraph", children: [{ text: "" }] },
 ];
 
-const pluginFactorys: PluginFactory[] = [
+const pluginFactorys: PluginFactory<any>[] = [
+  SideMenuPluginFactory,
   BoldPluginFactory,
   UnderlinePluginFactory,
   ResumeBasicPluginFactory,

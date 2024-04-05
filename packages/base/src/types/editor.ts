@@ -33,7 +33,6 @@ export interface IRenderLeafContext {
 
 export interface IRenderElementContext {
     classNames: string[];
-    children: any
 }
 
 export interface IFlxEditorPlugin extends IBasePlugin, EditorEvents {

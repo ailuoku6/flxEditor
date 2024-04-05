@@ -11,7 +11,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@arco-design/web-react": "^2.61.2",
     "@icon-park/react": "^1.4.2",
+    "rc-trigger": "^5.3.4",
     "slate": "^0.94.1",
     "slate-history": "^0.93.0",
     "slate-react": "^0.97.2",

@@ -1,9 +1,14 @@
 import type { BaseEditor } from "slate";
+import { ReactEditor } from "slate-react";
 // import { Node } from "slate";
+
+interface CustomEditor {
+
+}
 
 declare module "slate" {
     interface CustomTypes {
-        Editor: BaseEditor;
+        Editor: BaseEditor & ReactEditor & CustomEditor;
         Element: BlockElement;
         Text: TextElement;
     }

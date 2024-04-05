@@ -1,8 +1,7 @@
 import React, { useMemo } from 'react';
 import { IFlxEditorPlugin, IRenderElementContext, PluginFactory, PluginType } from "../types";
 import { HistoryEditor, withHistory } from "slate-history";
-import { SideMenu } from '../common/components/side-menu';
-import { BaseEditor, BaseElement, createEditor } from 'slate';
+import { BaseEditor, BaseElement, CustomTypes, createEditor } from 'slate';
 
 import { ReactEditor, RenderElementProps, RenderLeafProps, withReact } from "slate-react";
 
@@ -10,9 +9,9 @@ export class EditorHelper {
     private plugins: IFlxEditorPlugin[];
     private wrapPlugins: IFlxEditorPlugin[];
     private elementPluginMap: Map<string, IFlxEditorPlugin>;
-    constructor(editor: ReactEditor, pluginFactorys: (({ editor }: { editor: ReactEditor }) => IFlxEditorPlugin)[]) {
+    constructor(editor: ReactEditor, pluginFactorys: PluginFactory<{ editorHelper: EditorHelper }>[]) {
 
-        const totalPlugins = pluginFactorys.map(genPlugin => genPlugin({ editor }));
+        const totalPlugins = pluginFactorys.map(genPlugin => genPlugin({ editor, editorHelper: this }));
 
         const plugins = totalPlugins.filter(p => p.type !== PluginType.ElementWrap);
         this.wrapPlugins = totalPlugins.filter(p => p.type === PluginType.ElementWrap)
@@ -45,13 +44,21 @@ export class EditorHelper {
 
         const context: IRenderElementContext = {
             classNames: [],
-            children: children
-        }
+        };
+
+        let child = children;
+
+        this.wrapPlugins.forEach((plugin) => {
+            if (plugin.match?.(props)) {
+                const ele = plugin.renderElement?.({ ...props, children: child }, context) || child;
+                child = ele;
+            }
+        });
 
         const type = (element as any).type as string;
         const elePlugin = this.elementPluginMap.get(type) || this.plugins.find((p) => p.match?.(props));
         return (
-            elePlugin?.renderElement?.({ ...props, children: context.children }, context) || <p {...attributes} >{context.children}</p>
+            elePlugin?.renderElement?.({ ...props, children: child }, context) || <p {...attributes} >{child}</p>
         );
     }
 
