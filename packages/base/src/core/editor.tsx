@@ -1,17 +1,21 @@
 import React, { useMemo } from 'react';
-import { IFlxEditorPlugin, PluginFactory, PluginType } from "../types";
+import { IFlxEditorPlugin, IRenderElementContext, PluginFactory, PluginType } from "../types";
 import { HistoryEditor, withHistory } from "slate-history";
-
+import { SideMenu } from '../common/components/side-menu';
 import { BaseEditor, BaseElement, createEditor } from 'slate';
 
 import { ReactEditor, RenderElementProps, RenderLeafProps, withReact } from "slate-react";
 
 export class EditorHelper {
     private plugins: IFlxEditorPlugin[];
+    private wrapPlugins: IFlxEditorPlugin[];
     private elementPluginMap: Map<string, IFlxEditorPlugin>;
     constructor(editor: ReactEditor, pluginFactorys: (({ editor }: { editor: ReactEditor }) => IFlxEditorPlugin)[]) {
 
-        const plugins = pluginFactorys.map(genPlugin => genPlugin({ editor }));
+        const totalPlugins = pluginFactorys.map(genPlugin => genPlugin({ editor }));
+
+        const plugins = totalPlugins.filter(p => p.type !== PluginType.ElementWrap);
+        this.wrapPlugins = totalPlugins.filter(p => p.type === PluginType.ElementWrap)
 
         this.plugins = plugins.sort((a, b) => (a.priority || 0) - (b.priority || 0));
 
@@ -39,10 +43,15 @@ export class EditorHelper {
     renderElement(props: RenderElementProps) {
         const { element, attributes, children } = props;
 
+        const context: IRenderElementContext = {
+            classNames: [],
+            children: children
+        }
+
         const type = (element as any).type as string;
         const elePlugin = this.elementPluginMap.get(type) || this.plugins.find((p) => p.match?.(props));
         return (
-            elePlugin?.renderElement?.(props) || <p {...attributes} >{children}</p>
+            elePlugin?.renderElement?.({ ...props, children: context.children }, context) || <p {...attributes} >{context.children}</p>
         );
     }
 

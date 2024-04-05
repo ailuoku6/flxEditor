@@ -1,4 +1,4 @@
-import { IFlxEditorPlugin, PluginType, useSlate, Transforms, PluginFactory, LeafPlaceholder } from 'flx-editor-base';
+import { IFlxEditorPlugin, PluginType, useSlate, Transforms, PluginFactory, LeafPlaceholder, getLeafNodeAncestors, Editor, Node as SlateNode, getLeafNode } from 'flx-editor-base';
 
 import React from 'react';
 import './index.css';
@@ -9,6 +9,8 @@ const BasicGender = "resume-basic-gender";
 const BasicAddress = "resume-basic-address";
 const BasicPhone = "resume-basic-phone";
 const BasicEmail = "resume-basic-email";
+
+const unEnterFields = new Set([BasicName, BasicGender, BasicAddress, BasicPhone, BasicEmail]);
 
 const totalBasic = [BasicName, BasicGender, BasicAddress, BasicPhone, BasicEmail];
 
@@ -60,6 +62,21 @@ export const ResumeBasicPluginFactory: PluginFactory = ({ editor }) => {
             toolBarWidget: (
                 <BasicButton />
             ),
+        },
+        onKeyDown(e) {
+            if (e.key === 'Enter') {
+                const nodes = getLeafNodeAncestors(editor);
+                const selected = nodes?.some((nodeInfo) => {
+                    const node = nodeInfo[0] as any;
+                    return unEnterFields.has(node?.type || node?.leafType);
+                });
+
+                if (selected) {
+                    return true;
+                }
+            }
+
+            return false;
         },
     }
 }

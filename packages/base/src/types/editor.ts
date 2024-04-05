@@ -6,7 +6,8 @@ import { RenderElementProps, RenderLeafProps, ReactEditor } from "slate-react";
 
 export enum PluginType {
     Element = "element",
-    Leaf = "leaf"
+    Leaf = "leaf",
+    ElementWrap = "element-wrap"
 }
 
 interface IBasePlugin {
@@ -30,13 +31,18 @@ export interface IRenderLeafContext {
     classNames: string[];
 }
 
+export interface IRenderElementContext {
+    classNames: string[];
+    children: any
+}
+
 export interface IFlxEditorPlugin extends IBasePlugin, EditorEvents {
 
     match?: (element: RenderElementProps) => boolean;
 
     matchLeaf?: (element: RenderLeafProps) => boolean;
 
-    renderElement?: (props: RenderElementProps) => JSX.Element | undefined;
+    renderElement?: (props: RenderElementProps, context: IRenderElementContext) => JSX.Element | undefined;
 
     renderLeaf?: (props: RenderLeafProps, context: IRenderLeafContext) => JSX.Element | undefined;
 

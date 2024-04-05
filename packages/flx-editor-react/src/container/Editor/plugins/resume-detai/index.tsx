@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-import { IFlxEditorPlugin, PluginType, PluginFactory, useSlate, Transforms, genUUID, Node as SlateNode, Text as SlateText, LeafPlaceholder } from 'flx-editor-base';
+import { IFlxEditorPlugin, PluginType, PluginFactory, useSlate, Transforms, genUUID, Node as SlateNode, Text as SlateText, LeafPlaceholder, getLeafNodeAncestors, BaseNode } from 'flx-editor-base';
 
 import './index.css';
 
@@ -13,6 +13,8 @@ const resumeDetailTitle = 'resume-detail-title';
 const resumeDetailDate = 'resume-detail-date';
 
 const resumeDetailContent = 'resume-detail-content';
+
+const unEnterable = new Set([resumeDetailTitle, resumeDetailDate]);
 
 const totalEditField = [resumeDetailTitle, resumeDetailDate, resumeDetailContent];
 
@@ -73,6 +75,22 @@ export const ResumeDetailPluginFactory: PluginFactory = ({ editor }) => {
             toolBarWidget: (
                 <BasicButton />
             ),
+        },
+
+        onKeyDown(e) {
+            if (e.key === 'Enter') {
+                const nodes = getLeafNodeAncestors(editor);
+
+                const selected = nodes?.some((nodeInfo) => {
+                    const node = nodeInfo[0] as any;
+                    return unEnterable.has(node?.type || node?.leafType);
+                });
+
+                if (selected) {
+                    return true;
+                }
+            }
+            return false;
         },
 
         // TODO: 限制删除，回车行为

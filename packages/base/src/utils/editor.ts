@@ -6,9 +6,12 @@ import {
     Descendant,
     Element as SlateElement,
     BaseEditor,
+    Path,
+    Node as SlateNode,
 } from 'slate'
 
 import { ReactEditor } from "slate-react";
+import { TextElement } from '../types';
 
 export const isMarkActive = (editor: ReactEditor, format: string) => {
     const marks = Editor.marks(editor) as Record<string, boolean>;
@@ -80,8 +83,8 @@ export const toggleBlock = (editor: ReactEditor, format: string) => {
     // }
 }
 
-// 实现基本基本util，根据selection获取当前选中的叶子节点，以及父节点（包括祖先节点）
-export const getLeafNode = (editor: ReactEditor) => {
+// 根据selection获取当前选中的叶子节点，以及父节点（包括祖先节点）
+export const getLeafNodeAncestors = (editor: ReactEditor) => {
     const { selection } = editor;
     if (!selection) return null;
     const nodes = Array.from(Editor.nodes(editor, {
@@ -89,6 +92,17 @@ export const getLeafNode = (editor: ReactEditor) => {
     })).filter(([node]) => {
         return !Editor.isEditor(node);
     });
+
+    return nodes;
+}
+
+// Editor.leaf 对嵌套Element的兼容性不好
+export const getLeafNode = (editor: ReactEditor) => {
+    const { selection } = editor;
+    if (!selection) return null;
+
+    const nodes = Array.from(SlateNode.texts(editor, { from: selection.anchor.path, to: selection.focus.path }));
+
     return nodes;
 }
 
