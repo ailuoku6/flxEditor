@@ -8,15 +8,18 @@ import { ReactEditor, RenderElementProps, RenderLeafProps, withReact } from "sla
 export class EditorHelper {
     private plugins: IFlxEditorPlugin[];
     private wrapPlugins: IFlxEditorPlugin[];
+    private totalPlugins: IFlxEditorPlugin[];
     private elementPluginMap: Map<string, IFlxEditorPlugin>;
     constructor(editor: ReactEditor, pluginFactorys: PluginFactory<{ editorHelper: EditorHelper }>[]) {
 
-        const totalPlugins = pluginFactorys.map(genPlugin => genPlugin({ editor, editorHelper: this }));
+        const totalPlugins = pluginFactorys.map(genPlugin => genPlugin({ editor, editorHelper: this })).sort((a, b) => (a.priority || 0) - (b.priority || 0));
+
+        this.totalPlugins = totalPlugins;
 
         const plugins = totalPlugins.filter(p => p.type !== PluginType.ElementWrap);
         this.wrapPlugins = totalPlugins.filter(p => p.type === PluginType.ElementWrap)
 
-        this.plugins = plugins.sort((a, b) => (a.priority || 0) - (b.priority || 0));
+        this.plugins = plugins;
 
         this.elementPluginMap = new Map(
             plugins.filter((p) => p.type === PluginType.Element).map((p) => [p.name, p])
@@ -35,7 +38,7 @@ export class EditorHelper {
     }
 
     getPlugins() {
-        return this.plugins;
+        return this.totalPlugins;
     }
 
     // 按照插件注册名称查找插件，否则遍历插件使用match逻辑
