@@ -57,8 +57,13 @@ export class EditorHelper {
 
         const type = (element as any).type as string;
         const elePlugin = this.elementPluginMap.get(type) || this.plugins.find((p) => p.match?.(props));
+
+        const renderEle = elePlugin?.renderElement?.({ ...props, children: child }, context);
+
         return (
-            elePlugin?.renderElement?.({ ...props, children: child }, context) || <p {...attributes} >{child}</p>
+            <div {...props.attributes} className={context.classNames.join(' ')}>
+                {renderEle || <p>{child}</p>}
+            </div>
         );
     }
 

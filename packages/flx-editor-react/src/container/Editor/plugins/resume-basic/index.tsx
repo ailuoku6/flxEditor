@@ -1,5 +1,7 @@
 import { IFlxEditorPlugin, PluginType, useSlate, Transforms, PluginFactory, LeafPlaceholder, getLeafNodeAncestors, Editor, Node as SlateNode, getLeafNode } from 'flx-editor-base';
-
+import { BaseButton } from 'flx-editor-base';
+import { ActivitySource } from '@icon-park/react';
+import { Tooltip } from '@arco-design/web-react';
 import React from 'react';
 import './index.css';
 const PluginName = "resume-basic";
@@ -16,15 +18,13 @@ const totalBasic = [BasicName, BasicGender, BasicAddress, BasicPhone, BasicEmail
 
 const BasicButton = () => {
     const editor = useSlate();
-    return <button onClick={() => {
+    return <Tooltip content="基本信息"><BaseButton onMouseDown={() => {
         Transforms.insertNodes(editor, {
             type: PluginName, children: totalBasic.map(field => {
                 return { type: field, children: [{ text: '', leafType: field }] }
             })
         });
-    }}>
-        resume-basic
-    </button>
+    }} icon={<ActivitySource />} /></Tooltip>
 }
 
 export const ResumeBasicPluginFactory: PluginFactory = ({ editor }) => {
@@ -36,10 +36,9 @@ export const ResumeBasicPluginFactory: PluginFactory = ({ editor }) => {
             return props.element.type === PluginName || totalBasic.some((name) => (props.element.type) === name);
         },
 
-        renderElement: (props) => {
-            return <div {...props.attributes} className={props.element.type}>
-                {props.children}
-            </div>
+        renderElement: (props, context) => {
+            context.classNames.push(props.element.type || '');
+            return props.children;
         },
 
         matchLeaf: (props) => {

@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { RenderElementProps, useSlate } from 'slate-react';
 import { IFlxEditorPlugin, PluginType } from '../../../../types';
 
-import { Plus, Delete } from '@icon-park/react';
+import { Plus, DeleteOne } from '@icon-park/react';
 import { Trigger, Button, Divider } from "@arco-design/web-react";
 import { Editor, Path, Transforms } from 'slate';
 
@@ -71,7 +71,7 @@ export const SideMenu = ({ plugins, renderElementProps, path }: SideMenuProps) =
         }} icon={<Plus theme="outline" size="24" />} />
         <Button onMouseDown={() => {
             Transforms.removeNodes(editor, { at: path })
-        }} type='primary' icon={<Delete theme="outline" size="24" />} />
+        }} type='primary' icon={<DeleteOne theme="outline" size="24" />} />
     </div>;
 
     return <>

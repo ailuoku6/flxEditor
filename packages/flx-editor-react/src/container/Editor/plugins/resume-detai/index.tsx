@@ -2,6 +2,10 @@ import React from 'react';
 
 
 import { IFlxEditorPlugin, PluginType, PluginFactory, useSlate, Transforms, genUUID, Node as SlateNode, Text as SlateText, LeafPlaceholder, getLeafNodeAncestors, BaseNode } from 'flx-editor-base';
+import { BaseButton } from 'flx-editor-base';
+import { ActivitySource } from '@icon-park/react';
+
+import { Tooltip } from '@arco-design/web-react';
 
 import './index.css';
 
@@ -23,20 +27,20 @@ const totalDetailElementField = [PluginName, resumeDetailTitleDateWrap, resumeDe
 const BasicButton = () => {
     const editor = useSlate();
 
-    return <button onClick={() => {
-        Transforms.insertNodes(editor, {
-            type: PluginName,
-            children: [{
-                type: resumeDetailTitleDateWrap,
-                children: [
-                    { type: resumeDetailTitle, children: [{ text: '', leafType: resumeDetailTitle }] },
-                    { type: resumeDetailDate, children: [{ text: '', leafType: resumeDetailDate }] }
-                ]
-            }, { type: resumeDetailContent, children: [{ text: '', leafType: resumeDetailContent }] }]
-        });
-    }}>
-        resume-detail
-    </button>
+    return <Tooltip content="简历title栏">
+        <BaseButton onMouseDown={() => {
+            Transforms.insertNodes(editor, {
+                type: PluginName,
+                children: [{
+                    type: resumeDetailTitleDateWrap,
+                    children: [
+                        { type: resumeDetailTitle, children: [{ text: '', leafType: resumeDetailTitle }] },
+                        { type: resumeDetailDate, children: [{ text: '', leafType: resumeDetailDate }] }
+                    ]
+                }, { type: resumeDetailContent, children: [{ text: '', leafType: resumeDetailContent }] }]
+            });
+        }} icon={<ActivitySource />} />
+    </Tooltip>
 }
 
 export const ResumeDetailPluginFactory: PluginFactory = ({ editor }) => {
@@ -46,13 +50,13 @@ export const ResumeDetailPluginFactory: PluginFactory = ({ editor }) => {
         match: (props) => {
             return totalDetailElementField.some((name) => (props.element.type) === name);
         },
-        renderElement: (props) => {
+        renderElement: (props, context) => {
 
             const { type } = props.element;
 
-            return <div {...props.attributes} className={type}>
-                {props.children}
-            </div>
+            context.classNames.push(type || '');
+
+            return props.children;
         },
 
         matchLeaf(props) {

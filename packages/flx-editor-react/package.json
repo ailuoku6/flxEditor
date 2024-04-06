@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@arco-design/web-react": "^2.61.2",
+    "@icon-park/react": "^1.4.2",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^13.2.1",
@@ -10,7 +12,6 @@
     "@types/node": "^16.7.13",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
-    "antd": "^5.8.1",
     "flx-editor-base": "workspace: *",
     "html2canvas": "^1.4.1",
     "jspdf": "^2.5.1",
