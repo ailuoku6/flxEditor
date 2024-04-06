@@ -27,20 +27,20 @@ const totalDetailElementField = [PluginName, resumeDetailTitleDateWrap, resumeDe
 const BasicButton = () => {
     const editor = useSlate();
 
-    return <Tooltip content="简历title栏">
-        <BaseButton onMouseDown={() => {
-            Transforms.insertNodes(editor, {
-                type: PluginName,
-                children: [{
-                    type: resumeDetailTitleDateWrap,
-                    children: [
-                        { type: resumeDetailTitle, children: [{ text: '', leafType: resumeDetailTitle }] },
-                        { type: resumeDetailDate, children: [{ text: '', leafType: resumeDetailDate }] }
-                    ]
-                }, { type: resumeDetailContent, children: [{ text: '', leafType: resumeDetailContent }] }]
-            });
-        }} icon={<ActivitySource />} />
-    </Tooltip>
+    return <BaseButton onMouseDown={() => {
+        Transforms.insertNodes(editor, {
+            type: PluginName,
+            children: [{
+                type: resumeDetailTitleDateWrap,
+                children: [
+                    { type: resumeDetailTitle, children: [{ text: '', leafType: resumeDetailTitle }] },
+                    { type: resumeDetailDate, children: [{ text: '', leafType: resumeDetailDate }] }
+                ]
+            }, { type: resumeDetailContent, children: [{ text: '', leafType: resumeDetailContent }] }]
+        });
+    }} icon={<Tooltip content="简历title栏">
+        <ActivitySource />
+    </Tooltip>} />
 }
 
 const leafPlaceholder = (leafType: string) => {

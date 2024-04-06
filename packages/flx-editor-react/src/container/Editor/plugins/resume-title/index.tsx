@@ -14,13 +14,13 @@ const resumeTitleText = 'resume-title-text';
 const BasicButton = () => {
     const editor = useSlate();
 
-    return <Tooltip content="简历内容详情">
-        <BaseButton onMouseDown={() => {
-            Transforms.insertNodes(editor, {
-                type: PluginName, children: [{ text: '', leafType: resumeTitleText }]
-            });
-        }} icon={<ActivitySource />} />
-    </Tooltip>
+    return <BaseButton onMouseDown={() => {
+        Transforms.insertNodes(editor, {
+            type: PluginName, children: [{ text: '', leafType: resumeTitleText }]
+        });
+    }} icon={<Tooltip content="简历内容详情">
+        <ActivitySource />
+    </Tooltip>} />
 }
 
 export const ResumeTitlePluginFactory: PluginFactory = ({ editor }) => {

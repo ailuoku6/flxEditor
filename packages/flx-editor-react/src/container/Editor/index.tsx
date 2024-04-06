@@ -67,7 +67,7 @@ export default function FlxEditor() {
     <div>
       <Slate editor={editor} initialValue={localData} onChange={handleChange}>
         <div className={"flx-editor-wrap"}>
-          <EditorToolbar plugins={editorHelper.getPlugins()} />
+          <EditorToolbar plugins={editorHelper.getPlugins()} className="toolbar" />
           <FloatMenu editorHelper={editorHelper} />
           <Editable
             className="flx-editor"

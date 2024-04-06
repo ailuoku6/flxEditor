@@ -83,6 +83,14 @@ p {
   border-radius: 6px;
 
   padding: 40px;
+
+  position: relative;
+
+  .toolbar {
+    position: sticky;
+    top: 30px;
+  }
+
   .flx-editor {
     outline: none;
   }

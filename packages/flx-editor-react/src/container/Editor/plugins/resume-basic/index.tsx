@@ -18,13 +18,13 @@ const totalBasic = [BasicName, BasicGender, BasicAddress, BasicPhone, BasicEmail
 
 const BasicButton = () => {
     const editor = useSlate();
-    return <Tooltip content="基本信息"><BaseButton onMouseDown={() => {
+    return <BaseButton onMouseDown={() => {
         Transforms.insertNodes(editor, {
             type: PluginName, children: totalBasic.map(field => {
                 return { type: field, children: [{ text: '', leafType: field }] }
             })
         });
-    }} icon={<ActivitySource />} /></Tooltip>
+    }} icon={<Tooltip content="基本信息"><ActivitySource /></Tooltip>} />
 }
 
 const leafPlaceholder = (leafType: string) => {
