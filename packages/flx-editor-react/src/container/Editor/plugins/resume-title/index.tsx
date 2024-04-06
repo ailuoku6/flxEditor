@@ -39,7 +39,7 @@ export const ResumeTitlePluginFactory: PluginFactory = ({ editor }) => {
         renderLeaf(props, context) {
             if (props.leaf.text === '') {
                 return <>
-                    <LeafPlaceholder placeholder='enter some text...' />
+                    <LeafPlaceholder placeholder='标题' />
                     {props.children}
                 </>
             }

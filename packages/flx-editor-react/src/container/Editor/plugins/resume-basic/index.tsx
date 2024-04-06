@@ -27,6 +27,18 @@ const BasicButton = () => {
     }} icon={<ActivitySource />} /></Tooltip>
 }
 
+const leafPlaceholder = (leafType: string) => {
+    const map: Record<string, string> = {
+        [BasicName]: '姓名',
+        [BasicGender]: '性别',
+        [BasicAddress]: '地址',
+        [BasicPhone]: '电话',
+        [BasicEmail]: '邮箱',
+    };
+
+    return map[leafType] || 'enter some text...';
+}
+
 export const ResumeBasicPluginFactory: PluginFactory = ({ editor }) => {
     return {
         name: PluginName,
@@ -49,7 +61,7 @@ export const ResumeBasicPluginFactory: PluginFactory = ({ editor }) => {
         renderLeaf: (props) => {
             if (props.leaf.text === '') {
                 return <>
-                    <LeafPlaceholder placeholder='enter some text...' />
+                    <LeafPlaceholder placeholder={leafPlaceholder(props.leaf.leafType || '')} />
                     {props.children}
                 </>
             }

@@ -43,6 +43,16 @@ const BasicButton = () => {
     </Tooltip>
 }
 
+const leafPlaceholder = (leafType: string) => {
+    const map: Record<string, string> = {
+        [resumeDetailTitle]: '大条目名称',
+        [resumeDetailDate]: '日期',
+        [resumeDetailContent]: '详情',
+    };
+
+    return map[leafType] || 'enter some text...';
+}
+
 export const ResumeDetailPluginFactory: PluginFactory = ({ editor }) => {
     return {
         name: PluginName,
@@ -67,7 +77,7 @@ export const ResumeDetailPluginFactory: PluginFactory = ({ editor }) => {
 
             if (props.leaf.text === '') {
                 return <>
-                    <LeafPlaceholder placeholder='enter some text...' />
+                    <LeafPlaceholder placeholder={leafPlaceholder(props.leaf.leafType || '')} />
                     {props.children}
                 </>
             }
