@@ -10,12 +10,14 @@ export const EditorToolbar = ({ plugins, className }: { plugins: IFlxEditorPlugi
 
             const category = plugin.widget?.category?.label || 'unknown';
 
-            if (plugin.widget?.sidebarWidget) {
+            const widget = plugin.widget?.toolbarWidget || plugin.widget?.popupWidget;
+
+            if (widget) {
                 if (!acc.get(category)) {
                     // acc[category] = [];
                     acc.set(category, []);
                 }
-                acc.get(category)?.push(plugin.widget?.sidebarWidget);
+                acc.get(category)?.push(widget);
             }
             return acc;
         }, new Map<string, React.ReactNode[]>());

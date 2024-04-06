@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { RenderElementProps, useSlate } from 'slate-react';
 import { IFlxEditorPlugin, PluginType } from '../../../../types';
 
-import { Plus } from '@icon-park/react';
+import { Plus, Delete } from '@icon-park/react';
 import { Trigger, Button, Divider } from "@arco-design/web-react";
 import { Editor, Path, Transforms } from 'slate';
 
@@ -21,58 +21,58 @@ export const SideMenu = ({ plugins, renderElementProps, path }: SideMenuProps) =
 
     console.info('SideMenu renderElementProps:', plugins, renderElementProps);
 
-    const popContent = useMemo(() => {
+    // const popContent = useMemo(() => {
 
-        const pluginWidgets = plugins.filter(p => p.widget?.sidebarWidget && p.type === PluginType.Element);
+    //     const pluginWidgets = plugins.filter(p => p.widget?.toolbarWidget && p.type === PluginType.Element);
 
-        return <div className='pop-content'>
-            <div className='widgets' onMouseDownCapture={() => {
-                const end = Editor.end(editor, path);
-                Transforms.select(editor, end);
-            }}>
-                {pluginWidgets.map(plugin => {
-                    return <div key={plugin.name} className='pop-item'>
-                        {plugin.widget?.sidebarWidget}
-                    </div>
-                })}
-            </div>
-            <Divider />
-            <div>
-                <div onMouseDown={() => {
-                    Transforms.removeNodes(editor, { at: path })
-                }}>删除</div>
-            </div>
+    //     return <div className='pop-content'>
+    //         <div className='widgets' onMouseDownCapture={() => {
+    //             // const end = Editor.end(editor, path);
+    //             // const range = Editor.range(editor, path);
+    //             Transforms.select(editor, path);
+    //             console.info('------editor selection', editor.selection);
+    //             // const newPath = Path.next(path);
+    //             // Transforms.insertNodes(editor, { type: 'paragraph', children: [{ text: '' }] }, { at: newPath });
 
-            <Divider />
+    //             // const end = Editor.end(editor, newPath);
+    //             // Transforms.select(editor, end);
+    //         }}>
+    //             {pluginWidgets.map(plugin => {
+    //                 return <div key={plugin.name} className='pop-item'>
+    //                     {plugin.widget?.toolbarWidget}
+    //                 </div>
+    //             })}
+    //         </div>
+    //         <Divider />
+    //         <div>
+    //             <div onMouseDown={() => {
+    //                 Transforms.removeNodes(editor, { at: path })
+    //             }}>删除</div>
+    //         </div>
 
-            <Trigger position='rt' popup={() => {
-                return <div className='pop-content'>
-                    <div className='widgets' onMouseDownCapture={() => {
-                        // const range = Editor.range(editor, path);
-                        const newPath = Path.next(path);
-                        Transforms.insertNodes(editor, { type: 'paragraph', children: [{ text: '' }] }, { at: newPath });
+    //         <Divider />
 
-                        const end = Editor.end(editor, newPath);
-                        Transforms.select(editor, end);
+    //         <div>
+    //             在下方添加
+    //         </div>
 
-                    }}>
-                        {pluginWidgets.map(plugin => {
-                            return <div key={plugin.name} className='pop-item'>
-                                {plugin.widget?.sidebarWidget}
-                            </div>
-                        })}
-                    </div>
-                </div>
-            }}>
-                <div>
-                    在下方添加
-                </div>
-            </Trigger>
+    //     </div>
+    // }, []);
 
-        </div>
-    }, []);
+    // const innerTriggerMenu = <Trigger position='bl' popup={() => popContent}><Button type='primary' icon={<Plus theme="outline" size="24" />} /></Trigger>;
 
-    const innerTriggerMenu = <Trigger position='bl' popup={() => popContent}><Button type='primary' icon={<Plus theme="outline" size="24" />} /></Trigger>;
+    const innerTriggerMenu = <div className='side-menu'>
+        <Button type='primary' onMouseDown={() => {
+            const newPath = Path.next(path);
+            Transforms.insertNodes(editor, { type: 'paragraph', children: [{ text: '' }] }, { at: newPath });
+
+            const end = Editor.end(editor, newPath);
+            Transforms.select(editor, end);
+        }} icon={<Plus theme="outline" size="24" />} />
+        <Button onMouseDown={() => {
+            Transforms.removeNodes(editor, { at: path })
+        }} type='primary' icon={<Delete theme="outline" size="24" />} />
+    </div>;
 
     return <>
         <Trigger onVisibleChange={v => {

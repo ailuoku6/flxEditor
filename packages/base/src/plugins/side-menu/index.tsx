@@ -10,6 +10,8 @@ import { ReactEditor } from "slate-react";
 
 export const PluginName = "side-menu";
 
+// 由于富文本有时候选区不是很友好，这里通过sidebar增强选区的交互
+// 删除和新增行
 export const SideMenuPluginFactory: PluginFactory<{ editorHelper: EditorHelper }> = ({ editor, editorHelper }) => {
     return {
         name: PluginName,

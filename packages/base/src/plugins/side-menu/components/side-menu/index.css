@@ -7,6 +7,12 @@
     border: 1px solid #ccc;
 }
 
+.side-menu {
+    display: flex;
+    /* flex-direction: column; */
+    gap: 8px;
+}
+
 .widgets {
     display: flex;
     align-items: center;

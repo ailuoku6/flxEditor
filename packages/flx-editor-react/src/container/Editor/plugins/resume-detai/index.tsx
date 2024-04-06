@@ -72,7 +72,7 @@ export const ResumeDetailPluginFactory: PluginFactory = ({ editor }) => {
         },
 
         widget: {
-            sidebarWidget: (
+            toolbarWidget: (
                 <BasicButton />
             ),
         },
