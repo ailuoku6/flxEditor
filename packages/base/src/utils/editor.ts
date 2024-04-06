@@ -106,3 +106,20 @@ export const getLeafNode = (editor: ReactEditor) => {
     return nodes;
 }
 
+export const getCurrentElement = (editor: BaseEditor & ReactEditor) => {
+    // 获取当前选区的元素节点
+    const match = Editor.above(editor, {
+        match: n => Editor.isBlock(editor, n as any)
+    });
+
+    if (match) {
+        const [node, path] = match || [];
+        if (SlateElement.isElement(node)) {
+            // node 是当前选区的元素节点
+            // path 是该元素节点在文档中的路径
+            return [node, path] as [SlateElement, Path];
+        }
+    }
+    return [null, null]
+}
+

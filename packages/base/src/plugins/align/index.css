@@ -1,3 +1,12 @@
+.align-pop-content {
+    display: flex;
+    gap: 4px;
+    padding: 8px;
+    border-radius: 6px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+}
+
 .align-left {
     text-align: left;
 }
@@ -8,4 +17,8 @@
 
 .align-right {
     text-align: right;
+}
+
+.align-both {
+    text-align: justify;
 }

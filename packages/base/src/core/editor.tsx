@@ -47,6 +47,7 @@ export class EditorHelper {
 
         const context: IRenderElementContext = {
             classNames: [],
+            style: {}
         };
 
         let child = children;
@@ -64,8 +65,8 @@ export class EditorHelper {
         const renderEle = elePlugin?.renderElement?.({ ...props, children: child }, context);
 
         return (
-            <div {...props.attributes} className={context.classNames.join(' ')}>
-                {renderEle || <p>{child}</p>}
+            <div style={context.style} {...props.attributes} className={context.classNames.join(' ')}>
+                {renderEle || child}
             </div>
         );
     }

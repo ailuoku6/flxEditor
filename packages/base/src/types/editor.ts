@@ -33,6 +33,7 @@ export interface IRenderLeafContext {
 
 export interface IRenderElementContext {
     classNames: string[];
+    style: React.CSSProperties
 }
 
 export interface IFlxEditorPlugin extends IBasePlugin, EditorEvents {

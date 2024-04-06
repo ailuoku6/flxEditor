@@ -14,8 +14,14 @@
     transition: all 0.2s;
 }
 
+.base-button svg {
+    width: 16px;
+    height: 16px;
+    color: var(--action-btn-color, #000);
+}
+
 .base-button:hover {
-    background-color: aquamarine;
+    background-color:#c0c3c3;
 }
 
 .base-button-disabled {
@@ -27,5 +33,5 @@
 }
 
 .base-button-selected {
-    background-color: aquamarine;
+    background-color:#c0c3c3;
 }

@@ -88,7 +88,11 @@ p {
 
   .toolbar {
     position: sticky;
+    transform: translate3d(-20px, 0px, 0);
     top: 30px;
+    border: 1px solid #ccc;
+    padding: 4px;
+    border-radius: 6px;
   }
 
   .flx-editor {
