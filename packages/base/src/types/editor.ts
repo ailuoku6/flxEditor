@@ -46,9 +46,10 @@ export interface IFlxEditorPlugin extends IBasePlugin, EditorEvents {
     renderLeaf?: (props: RenderLeafProps, context: IRenderLeafContext) => JSX.Element | undefined;
 
     widget?: {
-        toolBarWidget?: JSX.Element;
-        renderWidgetOnPupup?: boolean;
-        blockToolbarWidget?: boolean;
+        sidebarWidget?: JSX.Element;
+        popupWidget?: JSX.Element;
+        // renderWidgetOnPupup?: boolean;
+        // blockToolbarWidget?: boolean;
         category?: {
             label?: string;
             value?: string;

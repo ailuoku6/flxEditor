@@ -55,7 +55,7 @@ export const FloatMenu = ({ editorHelper }: { editorHelper: EditorHelper }) => {
                     e.preventDefault()
                 }}
             >
-                {editorHelper.getPlugins().filter(p => p.widget?.renderWidgetOnPupup).map(p => <div key={p.name}>{p.widget?.toolBarWidget}</div>)}
+                {editorHelper.getPlugins().filter(p => p.widget?.popupWidget).map(p => <div key={p.name}>{p.widget?.popupWidget}</div>)}
             </div>
         </Portal>
     )

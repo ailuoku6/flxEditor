@@ -23,13 +23,16 @@ export const SideMenu = ({ plugins, renderElementProps, path }: SideMenuProps) =
 
     const popContent = useMemo(() => {
 
-        const pluginWidgets = plugins.filter(p => p.widget?.toolBarWidget && p.type === PluginType.Element);
+        const pluginWidgets = plugins.filter(p => p.widget?.sidebarWidget && p.type === PluginType.Element);
 
         return <div className='pop-content'>
-            <div className='widgets'>
+            <div className='widgets' onMouseDownCapture={() => {
+                const end = Editor.end(editor, path);
+                Transforms.select(editor, end);
+            }}>
                 {pluginWidgets.map(plugin => {
                     return <div key={plugin.name} className='pop-item'>
-                        {plugin.widget?.toolBarWidget}
+                        {plugin.widget?.sidebarWidget}
                     </div>
                 })}
             </div>
@@ -45,12 +48,17 @@ export const SideMenu = ({ plugins, renderElementProps, path }: SideMenuProps) =
             <Trigger position='rt' popup={() => {
                 return <div className='pop-content'>
                     <div className='widgets' onMouseDownCapture={() => {
-                        const range = Editor.range(editor, path);
-                        Transforms.select(editor, range);
+                        // const range = Editor.range(editor, path);
+                        const newPath = Path.next(path);
+                        Transforms.insertNodes(editor, { type: 'paragraph', children: [{ text: '' }] }, { at: newPath });
+
+                        const end = Editor.end(editor, newPath);
+                        Transforms.select(editor, end);
+
                     }}>
                         {pluginWidgets.map(plugin => {
                             return <div key={plugin.name} className='pop-item'>
-                                {plugin.widget?.toolBarWidget}
+                                {plugin.widget?.sidebarWidget}
                             </div>
                         })}
                     </div>

@@ -22,10 +22,9 @@ export const UnderlinePluginFactory: PluginFactory = ({ editor }) => {
             }
         },
         widget: {
-            toolBarWidget: (
+            popupWidget: (
                 <MarkButton key={PluginName} format={PluginName} icon={<TextUnderline />} />
             ),
-            renderWidgetOnPupup: true,
         },
     }
 }

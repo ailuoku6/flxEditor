@@ -44,7 +44,7 @@ export const ResumeTitlePluginFactory: PluginFactory = ({ editor }) => {
             return <span {...props.attributes} className={resumeTitleText}>{props.children}</span>;
         },
         widget: {
-            toolBarWidget: (
+            sidebarWidget: (
                 <BasicButton />
             ),
         },

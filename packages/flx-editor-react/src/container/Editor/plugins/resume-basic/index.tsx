@@ -59,7 +59,7 @@ export const ResumeBasicPluginFactory: PluginFactory = ({ editor }) => {
         },
 
         widget: {
-            toolBarWidget: (
+            sidebarWidget: (
                 <BasicButton />
             ),
         },
