@@ -70,30 +70,48 @@ p {
   font-size: 22px;
 }
 
+.editor-toolbar-wrap {
+  position: relative;
+  max-width: 600px;
+  margin: auto;
+  margin-top: 50px;
+
+  border-radius: 6px;
+  border: 1px solid #ccc;
+
+  // overflow: hidden;
+
+  .toolbar {
+    position: sticky;
+    // transform: translate3d(-20px, 0px, 0);
+    top: 0;
+    padding: 4px;
+    border-bottom: 1px solid #ccc;
+    background-color: #fff;
+
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    // border: 1px solid #ccc;
+    // border-radius: 6px;
+  }
+}
+
 .flx-editor-wrap {
   font-family: 'oppo-sans';
   font-weight: 400;
 
-  border: 1px solid #ccc;
+  // border: 1px solid #ccc;
+  // border-radius: 6px;
 
   margin: auto;
-  margin-top: 50px;
+  
   max-width: 600px;
-
-  border-radius: 6px;
 
   padding: 40px;
 
   position: relative;
 
-  .toolbar {
-    position: sticky;
-    transform: translate3d(-20px, 0px, 0);
-    top: 30px;
-    border: 1px solid #ccc;
-    padding: 4px;
-    border-radius: 6px;
-  }
+  overflow: scroll;
 
   .flx-editor {
     outline: none;

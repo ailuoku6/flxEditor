@@ -18,7 +18,7 @@ const BasicButton = () => {
         Transforms.insertNodes(editor, {
             type: PluginName, children: [{ text: '', leafType: resumeTitleText }]
         });
-    }} icon={<Tooltip content="简历内容详情">
+    }} icon={<Tooltip content="简历title栏">
         <ActivitySource />
     </Tooltip>} />
 }

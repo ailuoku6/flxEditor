@@ -67,19 +67,23 @@ export default function FlxEditor() {
   return (
     <div>
       <Slate editor={editor} initialValue={localData} onChange={handleChange}>
-        <div className={"flx-editor-wrap"}>
+        <div className="editor-toolbar-wrap">
           <EditorToolbar plugins={editorHelper.getPlugins()} className="toolbar" />
-          <FloatMenu editorHelper={editorHelper} />
-          <Editable
-            className="flx-editor"
-            renderElement={editorHelper.renderElement}
-            renderLeaf={editorHelper.renderLeaf}
-            onKeyDown={editorHelper.onKeyDown}
-            placeholder="Enter some rich text…"
-            spellCheck
-            autoFocus
-          />
+          <div className={"flx-editor-wrap"}>
+
+            <FloatMenu editorHelper={editorHelper} />
+            <Editable
+              className="flx-editor"
+              renderElement={editorHelper.renderElement}
+              renderLeaf={editorHelper.renderLeaf}
+              onKeyDown={editorHelper.onKeyDown}
+              placeholder="Enter some rich text…"
+              spellCheck
+              autoFocus
+            />
+          </div>
         </div>
+
       </Slate>
       <div className="save-btn" onClick={handleSave}>save</div>
     </div>

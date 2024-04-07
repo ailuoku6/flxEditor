@@ -38,7 +38,7 @@ const BasicButton = () => {
                 ]
             }, { type: resumeDetailContent, children: [{ text: '', leafType: resumeDetailContent }] }]
         });
-    }} icon={<Tooltip content="简历title栏">
+    }} icon={<Tooltip content="简历内容详情">
         <ActivitySource />
     </Tooltip>} />
 }
