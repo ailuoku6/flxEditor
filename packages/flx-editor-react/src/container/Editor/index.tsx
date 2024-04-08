@@ -1,21 +1,32 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect, useMemo } from 'react';
 
-import "./index.scss";
-import { IFlxEditorPlugin, initFlxEditor, Descendant, Editable, Slate, BoldPluginFactory, UnderlinePluginFactory, AlignPluginFactory, SideMenuPluginFactory, PluginFactory } from "flx-editor-base";
+import './index.scss';
+import {
+  IFlxEditorPlugin,
+  initFlxEditor,
+  Descendant,
+  Editable,
+  Slate,
+  BoldPluginFactory,
+  UnderlinePluginFactory,
+  AlignPluginFactory,
+  SideMenuPluginFactory,
+  PluginFactory,
+} from 'flx-editor-base';
 
-import { ResumeBasicPluginFactory } from "./plugins/resume-basic";
-import { ResumeTitlePluginFactory } from "./plugins/resume-title";
-import { ResumeDetailPluginFactory } from "./plugins/resume-detai";
+import { ResumeBasicPluginFactory } from './plugins/resume-basic';
+import { ResumeTitlePluginFactory } from './plugins/resume-title';
+import { ResumeDetailPluginFactory } from './plugins/resume-detai';
 // import { Descendant } from "slate";
 
-import { EditorToolbar, FloatMenu } from "flx-editor-base";
+import { EditorToolbar, FloatMenu } from 'flx-editor-base';
 
 // import Toolbar from "./components/Toolbar";
 
 const LocalDocDataKey = 'flx-resume-editor-doc-data';
 
 const initValue: Descendant[] = [
-  { type: "paragraph", children: [{ text: "" }] },
+  { type: 'paragraph', children: [{ text: '' }] },
 ];
 
 const pluginFactorys: PluginFactory<any>[] = [
@@ -25,10 +36,9 @@ const pluginFactorys: PluginFactory<any>[] = [
   AlignPluginFactory,
   ResumeBasicPluginFactory,
   ResumeTitlePluginFactory,
-  ResumeDetailPluginFactory
+  ResumeDetailPluginFactory,
   // ItalicPlugin,
 ];
-
 
 export default function FlxEditor() {
   const [editor, editorHelper] = useMemo(() => {
@@ -58,19 +68,19 @@ export default function FlxEditor() {
 
   const handleSave = () => {
     localStorage.setItem(LocalDocDataKey, JSON.stringify(editor.children));
-  }
+  };
 
-  const handleChange = (value: Descendant[]) => {
-
-  }
+  const handleChange = (value: Descendant[]) => {};
 
   return (
     <div>
       <Slate editor={editor} initialValue={localData} onChange={handleChange}>
         <div className="editor-toolbar-wrap">
-          <EditorToolbar plugins={editorHelper.getPlugins()} className="toolbar" />
-          <div className={"flx-editor-wrap"}>
-
+          <EditorToolbar
+            plugins={editorHelper.getPlugins()}
+            className="toolbar"
+          />
+          <div className={'flx-editor-wrap'}>
             <FloatMenu editorHelper={editorHelper} />
             <Editable
               className="flx-editor"
@@ -83,9 +93,10 @@ export default function FlxEditor() {
             />
           </div>
         </div>
-
       </Slate>
-      <div className="save-btn" onClick={handleSave}>save</div>
+      <div className="save-btn" onClick={handleSave}>
+        save
+      </div>
     </div>
   );
 }
