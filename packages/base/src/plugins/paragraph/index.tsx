@@ -4,11 +4,13 @@ import { useSlate } from 'slate-react';
 import { Tooltip } from '@arco-design/web-react';
 import { Transforms } from 'slate';
 
+import { paragraphType } from '../constants';
+
 import React from 'react';
 
 import { Text } from '@icon-park/react';
 
-const PluginName = 'paragraph';
+const PluginName = paragraphType;
 
 const BasicButton = () => {
   const editor = useSlate();

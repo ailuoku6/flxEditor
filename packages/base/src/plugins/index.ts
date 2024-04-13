@@ -2,8 +2,9 @@ export * from './bold';
 export * from './under-line';
 export * from './side-menu';
 export * from './align';
-
+export * from './head-text';
 export * from './paragraph';
 export * from './quote';
 export * from './delete';
 export * from './italic';
+export * from './constants';

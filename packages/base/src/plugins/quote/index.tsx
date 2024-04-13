@@ -10,6 +10,8 @@ import { Tooltip } from '@arco-design/web-react';
 
 import { Quote } from '@icon-park/react';
 
+import { paragraphType } from '../constants';
+
 const PluginName = 'quote';
 
 const BasicButton = () => {
@@ -19,7 +21,7 @@ const BasicButton = () => {
       onMouseDown={() => {
         Transforms.insertNodes(editor, {
           type: PluginName,
-          children: [{ type: 'paragraph', children: [{ text: '' }] }],
+          children: [{ type: paragraphType, children: [{ text: '' }] }],
         });
       }}
       icon={

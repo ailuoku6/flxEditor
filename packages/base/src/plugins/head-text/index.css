@@ -1,0 +1,8 @@
+.head-pop-content {
+  display: flex;
+  gap: 4px;
+  padding: 8px;
+  border-radius: 6px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+}
