@@ -59,8 +59,6 @@ export interface IFlxEditorPlugin extends IBasePlugin, EditorEvents {
   widget?: {
     toolbarWidget?: JSX.Element;
     popupWidget?: JSX.Element;
-    // renderWidgetOnPupup?: boolean;
-    // blockToolbarWidget?: boolean;
     category?: {
       label?: string;
       value?: string;
