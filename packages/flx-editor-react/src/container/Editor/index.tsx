@@ -12,6 +12,8 @@ import {
   AlignPluginFactory,
   SideMenuPluginFactory,
   PluginFactory,
+  ParagraphFactory,
+  QuoteFactory,
 } from 'flx-editor-base';
 
 import { ResumeBasicPluginFactory } from './plugins/resume-basic';
@@ -30,10 +32,13 @@ const initValue: Descendant[] = [
 ];
 
 const pluginFactorys: PluginFactory<any>[] = [
+  ParagraphFactory,
+
   SideMenuPluginFactory,
   BoldPluginFactory,
   UnderlinePluginFactory,
   AlignPluginFactory,
+  QuoteFactory,
   ResumeBasicPluginFactory,
   ResumeTitlePluginFactory,
   ResumeDetailPluginFactory,

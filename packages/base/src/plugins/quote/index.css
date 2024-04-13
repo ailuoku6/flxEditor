@@ -1,0 +1,7 @@
+.quote-block {
+  border-left: 2px solid rgb(95, 95, 96);
+  box-sizing: border-box;
+  display: flow-root;
+  margin: 0;
+  padding: 3px 0 3px 10px;
+}
