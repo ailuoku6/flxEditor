@@ -17,6 +17,7 @@ import {
   DeleteFactory,
   ItalicFactory,
   HeadPluginFactory,
+  paragraphType,
 } from 'flx-editor-base';
 
 import { ResumeBasicPluginFactory } from './plugins/resume-basic';
@@ -31,7 +32,7 @@ import { EditorToolbar, FloatMenu } from 'flx-editor-base';
 const LocalDocDataKey = 'flx-resume-editor-doc-data';
 
 const initValue: Descendant[] = [
-  { type: 'paragraph', children: [{ text: '' }] },
+  { type: paragraphType, children: [{ text: '' }] },
 ];
 
 const pluginFactorys: PluginFactory<any>[] = [

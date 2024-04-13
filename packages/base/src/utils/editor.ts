@@ -10,6 +10,8 @@ import {
 } from 'slate';
 
 import { ReactEditor } from 'slate-react';
+
+import { paragraphType } from '../plugins';
 import { TextElement } from '../types';
 
 export const isMarkActive = (editor: ReactEditor, format: string) => {
@@ -74,7 +76,7 @@ export const toggleBlock = (editor: ReactEditor, format: string) => {
   //     }
   // }
   newProperties = {
-    type: isActive ? 'paragraph' : format,
+    type: isActive ? paragraphType : format,
   };
   Transforms.setNodes<SlateElement>(editor, newProperties);
 
