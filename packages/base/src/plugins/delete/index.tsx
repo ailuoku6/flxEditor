@@ -2,13 +2,12 @@ import React from 'react';
 
 import { MarkButton } from '../../common';
 import { PluginFactory, PluginType } from '../../types';
-import { DeleteMode } from '@icon-park/react';
-
+import { Strikethrough } from '@icon-park/react';
 const PluginName = 'delete';
 
 const BasicButton = () => {
   return (
-    <MarkButton key={PluginName} format={PluginName} icon={<DeleteMode />} />
+    <MarkButton key={PluginName} format={PluginName} icon={<Strikethrough />} />
   );
 };
 
