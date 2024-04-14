@@ -17,17 +17,19 @@ import {
   withReact,
 } from 'slate-react';
 
-export class EditorHelper {
+export class EditorAdapter {
   private plugins: IFlxEditorPlugin[];
   private wrapPlugins: IFlxEditorElementPlugin[];
   private totalPlugins: IFlxEditorPlugin[];
   private elementPluginMap: Map<string, IFlxEditorPlugin>;
   constructor(
     editor: ReactEditor,
-    pluginFactorys: PluginFactory<{ editorHelper: EditorHelper }>[],
+    pluginFactorys: PluginFactory<{
+      editorAdapter: EditorAdapter;
+    }>[],
   ) {
     const totalPlugins = pluginFactorys
-      .map((genPlugin) => genPlugin({ editor, editorHelper: this }))
+      .map((genPlugin) => genPlugin({ editor, editorAdapter: this }))
       .sort((a, b) => (a.priority || 0) - (b.priority || 0));
 
     this.totalPlugins = totalPlugins;
@@ -52,10 +54,10 @@ export class EditorHelper {
     this.isVoid = this.isVoid.bind(this);
     this.onKeyDown = this.onKeyDown.bind(this);
 
-    this.initEditorHelper(editor);
+    this.initEditorAdapter(editor);
   }
 
-  private initEditorHelper(editor: ReactEditor) {
+  private initEditorAdapter(editor: ReactEditor) {
     editor.isVoid = this.isVoid;
   }
 
@@ -166,8 +168,8 @@ export class EditorHelper {
 
 export const initFlxEditor = (
   factorys: PluginFactory[],
-): [BaseEditor & ReactEditor & HistoryEditor, EditorHelper] => {
+): [BaseEditor & ReactEditor & HistoryEditor, EditorAdapter] => {
   const editor = withHistory(withReact(createEditor()));
-  const editorHelper = new EditorHelper(editor, factorys);
-  return [editor, editorHelper];
+  const editorAdapter = new EditorAdapter(editor, factorys);
+  return [editor, editorAdapter];
 };

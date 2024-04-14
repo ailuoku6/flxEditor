@@ -103,7 +103,7 @@ const pluginFactorys: PluginFactory<any>[] = [
 ];
 
 export default function FlxEditor() {
-    const [editor, editorHelper] = useMemo(() => {
+    const [editor, editorAdapter] = useMemo(() => {
         return initFlxEditor(pluginFactorys);
     }, []);
 
@@ -112,16 +112,16 @@ export default function FlxEditor() {
             <Slate editor={editor} initialValue={localData} onChange={handleChange}>
                 <div className="editor-toolbar-wrap">
                     <EditorToolbar
-                        plugins={editorHelper.getPlugins()}
+                        plugins={editorAdapter.getPlugins()}
                         className="toolbar"
                     />
                     <div className={'flx-editor-wrap'}>
-                        <FloatMenu editorHelper={editorHelper} />
+                        <FloatMenu editorAdapter={editorAdapter} />
                         <Editable
                             className="flx-editor"
-                            renderElement={editorHelper.renderElement}
-                            renderLeaf={editorHelper.renderLeaf}
-                            onKeyDown={editorHelper.onKeyDown}
+                            renderElement={editorAdapter.renderElement}
+                            renderLeaf={editorAdapter.renderLeaf}
+                            onKeyDown={editorAdapter.onKeyDown}
                             placeholder="Enter some rich text…"
                             spellCheck
                             autoFocus

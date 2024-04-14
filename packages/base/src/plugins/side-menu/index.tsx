@@ -2,7 +2,7 @@ import React from 'react';
 
 import { PluginFactory, PluginType } from '../../types';
 
-import { EditorHelper } from '../../core';
+import { EditorAdapter } from '../../core';
 
 import { SideMenu } from './components/side-menu';
 import { CustomTypes } from 'slate';
@@ -13,8 +13,8 @@ export const PluginName = 'side-menu';
 // 由于富文本有时候选区不是很友好，这里通过sidebar增强选区的交互
 // 删除和新增行
 export const SideMenuPluginFactory: PluginFactory<{
-  editorHelper: EditorHelper;
-}> = ({ editor, editorHelper }) => {
+  editorAdapter: EditorAdapter;
+}> = ({ editor, editorAdapter }) => {
   return {
     name: PluginName,
     type: PluginType.ElementWrap,
@@ -28,7 +28,7 @@ export const SideMenuPluginFactory: PluginFactory<{
         <SideMenu
           path={path}
           renderElementProps={props}
-          plugins={editorHelper.getPlugins()}
+          plugins={editorAdapter.getPlugins()}
         />
       );
     },

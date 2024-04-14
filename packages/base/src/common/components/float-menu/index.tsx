@@ -2,7 +2,7 @@ import React, { ReactNode, useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom';
 import { Editor, Range } from 'slate';
 import { useFocused, useSlate } from 'slate-react';
-import { EditorHelper } from '../../../core';
+import { EditorAdapter } from '../../../core';
 
 import './index.css';
 
@@ -12,7 +12,11 @@ export const Portal = ({ children }: { children?: ReactNode }) => {
     : null;
 };
 
-export const FloatMenu = ({ editorHelper }: { editorHelper: EditorHelper }) => {
+export const FloatMenu = ({
+  editorAdapter,
+}: {
+  editorAdapter: EditorAdapter;
+}) => {
   const ref = useRef<HTMLDivElement>(null);
   const editor = useSlate();
   const inFocus = useFocused();
@@ -55,7 +59,7 @@ export const FloatMenu = ({ editorHelper }: { editorHelper: EditorHelper }) => {
           e.preventDefault();
         }}
       >
-        {editorHelper
+        {editorAdapter
           .getPlugins()
           .filter((p) => p.widget?.popupWidget)
           .map((p) => (
