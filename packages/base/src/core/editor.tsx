@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 import {
   EventReturns,
+  IFlxEditorElementPlugin,
   IFlxEditorPlugin,
   IRenderElementContext,
   PluginFactory,
@@ -18,7 +19,7 @@ import {
 
 export class EditorHelper {
   private plugins: IFlxEditorPlugin[];
-  private wrapPlugins: IFlxEditorPlugin[];
+  private wrapPlugins: IFlxEditorElementPlugin[];
   private totalPlugins: IFlxEditorPlugin[];
   private elementPluginMap: Map<string, IFlxEditorPlugin>;
   constructor(
@@ -36,7 +37,7 @@ export class EditorHelper {
     );
     this.wrapPlugins = totalPlugins.filter(
       (p) => p.type === PluginType.ElementWrap,
-    );
+    ) as IFlxEditorElementPlugin[];
 
     this.plugins = plugins;
 
@@ -85,9 +86,9 @@ export class EditorHelper {
     const type = (element as any).type as string;
     const elePlugin =
       this.elementPluginMap.get(type) ||
-      this.plugins.find((p) => p.match?.(props));
+      this.plugins.find((p) => (p as IFlxEditorElementPlugin).match?.(props));
 
-    const renderEle = elePlugin?.renderElement?.(
+    const renderEle = (elePlugin as IFlxEditorElementPlugin)?.renderElement?.(
       { ...props, children: child },
       context,
     );

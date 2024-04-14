@@ -85,7 +85,7 @@ export const QuoteFactory: PluginFactory = ({ editor }) => {
 
 这个例子中的 `QuoteFactory` 插件将会渲染类型为 'quote' 的元素，并且在工具栏上显示一个按钮，在点击该按钮后会显示一个设置窗口。
 
-除此之外，插件还可以实现 `EditorEvents` 接口，这个接口定义了一些事件处理方法，比如 `onKeyDown`、`onCopy` 和 `onPaste`。如果事件处理方法返回 `EventReturns.Stop`，则不再继续传递给下一个插件。
+除此之外，插件还定义了一些事件处理方法，比如 `onKeyDown`、`onCopy` 和 `onPaste`。如果事件处理方法返回 `EventReturns.Stop`，则不再继续传递给下一个插件。
 
 ## 插件工厂
 

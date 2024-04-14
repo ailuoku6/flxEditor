@@ -15,6 +15,15 @@ interface IBasePlugin {
   isVoid?: boolean;
   priority?: number; // 优先级越高 在越外层
   decorate?: (entry: NodeEntry) => Range[] | undefined;
+
+  widget?: {
+    toolbarWidget?: JSX.Element;
+    popupWidget?: JSX.Element;
+    category?: {
+      label?: string;
+      value?: string;
+    };
+  };
 }
 
 type ExtractParameter<T> = T extends (event: infer P) => any ? P : never;
@@ -46,30 +55,28 @@ export interface IRenderElementContext {
   style: React.CSSProperties;
 }
 
-export interface IFlxEditorPlugin extends IBasePlugin, EditorEvents {
-  match?: (element: RenderElementProps) => boolean;
-
+export interface IFlxEditorLeafPlugin extends IBasePlugin, EditorEvents {
+  type: PluginType.Leaf;
   matchLeaf?: (element: RenderLeafProps) => boolean;
-
-  renderElement?: (
-    props: RenderElementProps,
-    context: IRenderElementContext,
-  ) => JSX.Element | undefined;
 
   renderLeaf?: (
     props: RenderLeafProps,
     context: IRenderLeafContext,
   ) => JSX.Element | undefined;
-
-  widget?: {
-    toolbarWidget?: JSX.Element;
-    popupWidget?: JSX.Element;
-    category?: {
-      label?: string;
-      value?: string;
-    };
-  };
 }
+
+export interface IFlxEditorElementPlugin
+  extends Omit<IFlxEditorLeafPlugin, 'type'> {
+  type: PluginType.Element | PluginType.ElementWrap;
+  match?: (element: RenderElementProps) => boolean;
+
+  renderElement?: (
+    props: RenderElementProps,
+    context: IRenderElementContext,
+  ) => JSX.Element | undefined;
+}
+
+export type IFlxEditorPlugin = IFlxEditorLeafPlugin | IFlxEditorElementPlugin;
 
 export type PluginFactory<T extends Record<string, any> = {}> = (
   args: { editor: ReactEditor } & T,
