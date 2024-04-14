@@ -9,6 +9,7 @@ import {
   Editor,
   Node as SlateNode,
   getLeafNode,
+  EventReturns,
 } from 'flx-editor-base';
 import { BaseButton } from 'flx-editor-base';
 import { ActivitySource } from '@icon-park/react';
@@ -121,11 +122,11 @@ export const ResumeBasicPluginFactory: PluginFactory = ({ editor }) => {
         });
 
         if (selected) {
-          return true;
+          return EventReturns.Stop;
         }
       }
 
-      return false;
+      return EventReturns.Continue;
     },
   };
 };

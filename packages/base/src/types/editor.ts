@@ -19,9 +19,14 @@ interface IBasePlugin {
 
 type ExtractParameter<T> = T extends (event: infer P) => any ? P : never;
 
+export enum EventReturns {
+  Continue = 'continue',
+  Stop = 'stop',
+}
+
 type BooleanEventHandlers<T> = {
   [K in keyof T]: T[K] extends (...args: any[]) => any
-    ? (event: ExtractParameter<T[K]>) => boolean
+    ? (event: ExtractParameter<T[K]>) => EventReturns
     : never;
 };
 

@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 import {
+  EventReturns,
   IFlxEditorPlugin,
   IRenderElementContext,
   PluginFactory,
@@ -140,7 +141,7 @@ export class EditorHelper {
     if (event.nativeEvent.isComposing) return void 0;
     for (const item of this.plugins) {
       const onKeyDownEvent = item.onKeyDown;
-      if (onKeyDownEvent?.(event)) {
+      if (onKeyDownEvent?.(event) === EventReturns.Stop) {
         event.preventDefault();
         break;
       }

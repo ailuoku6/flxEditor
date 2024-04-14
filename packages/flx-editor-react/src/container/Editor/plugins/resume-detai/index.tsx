@@ -12,6 +12,7 @@ import {
   LeafPlaceholder,
   getLeafNodeAncestors,
   BaseNode,
+  EventReturns,
 } from 'flx-editor-base';
 import { BaseButton } from 'flx-editor-base';
 import { ActivitySource } from '@icon-park/react';
@@ -143,10 +144,10 @@ export const ResumeDetailPluginFactory: PluginFactory = ({ editor }) => {
         });
 
         if (selected) {
-          return true;
+          return EventReturns.Stop;
         }
       }
-      return false;
+      return EventReturns.Continue;
     },
 
     // TODO: 限制删除，回车行为
