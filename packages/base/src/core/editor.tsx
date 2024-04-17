@@ -156,14 +156,6 @@ export class EditorAdapter {
     const elePlugin = this.elementPluginMap.get(type);
     return elePlugin?.isVoid || false;
   }
-
-  // renderToolBar() {
-  //   const toolBarWidgets = this.plugins
-  //     .filter((p) => p.widget?.toolBarWidget)
-  //     .map((p) => p.widget?.toolBarWidget);
-
-  //   return <Toolbar>{toolBarWidgets}</Toolbar>;
-  // }
 }
 
 export const initFlxEditor = (

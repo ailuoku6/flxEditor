@@ -17,6 +17,7 @@ import {
   DeleteFactory,
   ItalicFactory,
   HeadPluginFactory,
+  OrderListPluginFactory,
   paragraphType,
 } from 'flx-editor-base';
 
@@ -45,6 +46,7 @@ const pluginFactorys: PluginFactory<any>[] = [
   DeleteFactory,
   AlignPluginFactory,
   QuoteFactory,
+  OrderListPluginFactory,
   ResumeBasicPluginFactory,
   ResumeTitlePluginFactory,
   ResumeDetailPluginFactory,

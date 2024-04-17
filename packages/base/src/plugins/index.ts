@@ -7,4 +7,5 @@ export * from './paragraph';
 export * from './quote';
 export * from './delete';
 export * from './italic';
+export * from './order-list';
 export * from './constants';
