@@ -1,17 +1,17 @@
 import React from 'react';
 
 import {
-  IFlxEditorPlugin,
+  // IFlxEditorPlugin,
   PluginType,
   PluginFactory,
   useSlate,
   Transforms,
-  genUUID,
-  Node as SlateNode,
-  Text as SlateText,
+  // genUUID,
+  // Node as SlateNode,
+  // Text as SlateText,
   LeafPlaceholder,
   getLeafNodeAncestors,
-  BaseNode,
+  // BaseNode,
   EventReturns,
 } from 'flx-editor-base';
 import { BaseButton } from 'flx-editor-base';

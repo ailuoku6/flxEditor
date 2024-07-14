@@ -2,7 +2,7 @@ import React, { useEffect, useMemo } from 'react';
 
 import './index.scss';
 import {
-  IFlxEditorPlugin,
+  // IFlxEditorPlugin,
   initFlxEditor,
   Descendant,
   Editable,

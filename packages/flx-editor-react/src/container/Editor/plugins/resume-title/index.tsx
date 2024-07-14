@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {
-  IFlxEditorPlugin,
+  // IFlxEditorPlugin,
   PluginType,
   PluginFactory,
   useSlate,

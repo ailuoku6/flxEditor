@@ -1,14 +1,14 @@
 import {
-  IFlxEditorPlugin,
+  // IFlxEditorPlugin,
   PluginType,
   useSlate,
   Transforms,
   PluginFactory,
   LeafPlaceholder,
   getLeafNodeAncestors,
-  Editor,
-  Node as SlateNode,
-  getLeafNode,
+  // Editor,
+  // Node as SlateNode,
+  // getLeafNode,
   EventReturns,
 } from 'flx-editor-base';
 import { BaseButton } from 'flx-editor-base';
